@@ -5,8 +5,12 @@ RSpec.describe "As a user", type: :feature do
     visit '/'
 
     expect(current_path).to eq('/')
-    expect(page).to have_button('Login')
-    expect(page).to have_button('Register')
-    expect(page).to have_button('Join Game')
+    within('#index_btn') do
+      expect(page).to have_button('Login')
+      expect(page).to have_button('Register')
+      expect(page).to have_button('Join Game')
+      click_button('Register')
+    end
+    expect(current_path).to eq('/register')
   end
 end

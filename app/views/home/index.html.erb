@@ -1,7 +1,16 @@
 <div align="center">
-  <h1>Welcome to Telepic!</h1><hr><br>
+  <header class="index_header">
+    <h1>Welcome to Telepic!</h1><hr><br>
+  </header>
 
-  <%= button_to "Login", login_path %><br>
-  <%= button_to "Register" %><br>
-  <%= button_to "Join Game" %><br>
+  <div class="index_content">
+    <div id='index_btn'>
+      <%= button_to "Login", login_path %><br>
+      <%= button_to "Register", register_path, method: :get %><br>
+      <%= button_to "Join Game" %><br>
+    </div>
+  </div>
+
+  <footer class="index_footer">
+  </footer>
 </div>
