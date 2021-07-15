@@ -5,10 +5,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from '../components/App'
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
-    <App />,
+    <React.Fragment>
+
+      <Header />
+        <App />
+      <Footer />
+
+    </React.Fragment>,
     document.body.appendChild(document.createElement('div')),
   )
 })
