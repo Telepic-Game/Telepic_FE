@@ -12,5 +12,22 @@ RSpec.describe "As a user", type: :feature do
       click_button('Register')
     end
     expect(current_path).to eq('/register')
+    expect(page).to have_content('Register')
+    expect(page).to have_content('Register for Telepic!')
+    within('#register_form') do
+      expect(page).to have_field(:email)
+      expect(page).to have_field(:verify_email)
+      expect(page).to have_field(:password)
+      expect(page).to have_field(:password_confirmation)
+      expect(page).to have_button('Submit Registration!')
+
+      fill_in :email, with: 'example@example.com'
+      fill_in :verify_email, with: 'example@example.com'
+      fill_in :password, with: '1234'
+      fill_in :password_confirmation, with: '1234'
+
+      click_button('Submit Registration!')
+      # RegistrationService.destroy_all
+    end
   end
 end
