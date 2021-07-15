@@ -1,0 +1,19 @@
+<h1>Register for Telepic!</h1>
+
+<div id='register_form'>
+  <%= form_with url: '/register', local: true, method: :post do |f| %>
+    <%= f.label :email  %>
+    <%= f.text_field :email  %>
+
+    <%= f.label :verify_email  %>
+    <%= f.text_field :verify_email  %>
+
+    <%= f.label :password  %>
+    <%= f.text_field :password  %>
+
+    <%= f.label :password_confirmation  %>
+    <%= f.text_field :password_confirmation  %>
+
+    <%= f.submit "Submit Registration!" %>
+  <% end %>
+</div>
