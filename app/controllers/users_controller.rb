@@ -12,6 +12,7 @@ class UsersController < ApplicationController
         password_confirmation: params[:password_confirmation],
       }
     )
+    require 'pry'; binding.pry
     # Create a session too
   end
 end

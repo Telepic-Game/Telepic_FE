@@ -1,6 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe "As a user", type: :feature do
+  before :each do
+    User.destroy_all
+    RegistrationService.destroy_user('example@example.com')
+  end
+
   scenario "I can register as a new user" do
     visit '/'
 
@@ -27,7 +32,6 @@ RSpec.describe "As a user", type: :feature do
       fill_in :password_confirmation, with: '1234'
 
       click_button('Submit Registration!')
-      # RegistrationService.destroy_all
     end
   end
 end

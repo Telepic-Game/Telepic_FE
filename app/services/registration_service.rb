@@ -6,11 +6,16 @@ class RegistrationService
       req.headers['Content-Type'] = 'application/json'
       req.body = input.to_json
     end
-    user_date = JSON.parse(response.body, symbolize_names: true)
+    user_data = JSON.parse(response.body, symbolize_names: true)
     User.create(
-      email: user_date[:email],
+      email: user_data[:data][:attributes][:email],
+      be_id: user_data[:data][:id]
     )
-    require 'pry'; binding.pry
+  end
+
+  def self.destroy_user(email)
+    conn = local_conn
+    conn.delete("/api/v1/register/#{email}")
   end
 
   private
