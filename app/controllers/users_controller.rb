@@ -12,7 +12,14 @@ class UsersController < ApplicationController
         password_confirmation: params[:password_confirmation],
       }
     )
-    require 'pry'; binding.pry
-    # Create a session too
+    user = User.find_by(email: params[:email])
+    if user
+      session[:user_id] = user.id
+      flash[:success] = "Congratulations, you have successfully registered and are now logged in!\n Using the email: #{user.email}"
+      redirect_to root_path
+    else
+      flash[:danger] = "There was a problem registering you. Please try again."
+      render :new
+    end
   end
 end

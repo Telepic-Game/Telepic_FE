@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "As a user", type: :feature do
   before :each do
     User.destroy_all
-    RegistrationService.destroy_user('example@example.com')
+    TestService.clean_be_user_database('example@example.com')
   end
 
   scenario "I can register as a new user" do
@@ -33,5 +33,7 @@ RSpec.describe "As a user", type: :feature do
 
       click_button('Submit Registration!')
     end
+    expect(current_path).to eq(root_path)
+    expect(page).to have_content("Congratulations, you have successfully registered and are now logged in!")
   end
 end
