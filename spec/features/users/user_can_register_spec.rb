@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "As a user", type: :feature do
   before :each do
     User.destroy_all
-    TestService.clean_be_user_database('example@example.com')
+    TestService.clean_be_user_database
   end
 
   scenario "I can register as a new user" do
