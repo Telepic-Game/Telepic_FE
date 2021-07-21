@@ -9,13 +9,11 @@ class RegistrationService
     end
     user_data = JSON.parse(response.body, symbolize_names: true)
     if !user_data[:data]
-      return
+      return { "response": false }
     elsif user_data[:data]
-      # Create user in the FE db
-      User.create(
-        email: user_data[:data][:attributes][:email],
-        be_id: user_data[:data][:id]
-      )
+      return { "response": true,
+               "be_id": user_data[:data][:id],
+               "email": user_data[:data][:attributes][:email] }
     end
   end
 end

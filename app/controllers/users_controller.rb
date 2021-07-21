@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def create
     # Call the service to make the user in the BE db
-    RegistrationService.register_user(
+    can_register = RegistrationService.register_user(
       {
         email: params[:email],
         verify_email: params[:verify_email],
@@ -13,11 +13,14 @@ class UsersController < ApplicationController
         password_confirmation: params[:password_confirmation],
       }
     )
+    if can_register[:response]
     # Find user in the FE db if it was created
-    user = User.find_by(email: params[:email])
-    if user
+      user = User.create(
+        email: can_register[:email],
+        be_id: can_register[:be_id],
+      )
       session[:user_id] = user.id
-      flash[:success] = "Congratulations, you have successfully registered and are now logged in!\n Using the email: #{user.email}"
+      flash[:success] = "Congratulations, you have successfully registered and are now logged in!\n   Usingthe email: #{user.email}"
       redirect_to root_path
     else
       flash[:danger] = "There was a problem registering you. Please try again."
