@@ -8,9 +8,14 @@ class RegistrationService
       req.body = input.to_json
     end
     user_data = JSON.parse(response.body, symbolize_names: true)
-    User.create(
-      email: user_data[:data][:attributes][:email],
-      be_id: user_data[:data][:id]
-    )
+    if !user_data[:data]
+      return
+    elsif user_data[:data]
+      # Create user in the FE db
+      User.create(
+        email: user_data[:data][:attributes][:email],
+        be_id: user_data[:data][:id]
+      )
+    end
   end
 end

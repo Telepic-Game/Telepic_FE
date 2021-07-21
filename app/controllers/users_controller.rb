@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    # Call the service to make the user in the BE db
     RegistrationService.register_user(
       {
         email: params[:email],
@@ -12,6 +13,7 @@ class UsersController < ApplicationController
         password_confirmation: params[:password_confirmation],
       }
     )
+    # Find user in the FE db if it was created
     user = User.find_by(email: params[:email])
     if user
       session[:user_id] = user.id
