@@ -67,5 +67,35 @@ RSpec.describe "As a user", type: :feature do
       expect(current_path).to eq('/register')
       expect(page).to have_content("There was a problem registering you. Please try again.")
     end
+
+    it "User doesnt get registered with empty password" do
+      visit '/register'
+
+      within('#register_form') do
+        fill_in :email, with: 'example@example.com'
+        fill_in :verify_email, with: 'example@example.com'
+        fill_in :password, with: ''
+        fill_in :password_confirmation, with: ';aldskjfafldksafj'
+
+        click_button('Submit Registration!')
+      end
+      expect(current_path).to eq('/register')
+      expect(page).to have_content("There was a problem registering you. Please try again.")
+    end
+
+    it "User doesnt get registered with empty password confirmation" do
+      visit '/register'
+
+      within('#register_form') do
+        fill_in :email, with: 'example@example.com'
+        fill_in :verify_email, with: 'example@example.com'
+        fill_in :password, with: 'YOyoyoyYO'
+        fill_in :password_confirmation, with: ''
+
+        click_button('Submit Registration!')
+      end
+      expect(current_path).to eq('/register')
+      expect(page).to have_content("There was a problem registering you. Please try again.")
+    end
   end
 end
