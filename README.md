@@ -100,8 +100,17 @@ This is an example of how to list things you need to use the software and how to
    ```
 4. Enter your API in `config.js`
    ```JS
-   const API_KEY = 'ENTER YOUR API'; -->
+   const API_KEY = 'ENTER YOUR API';
 
+5. To run locally use
+
+   Local Connection for Development
+  local_connection: http://localhost:3001  
+
+  put the above in config/application.yml
+  and make sure to put application.yml into git.ignore
+
+  -->
 
 
 <!-- USAGE EXAMPLES -->
