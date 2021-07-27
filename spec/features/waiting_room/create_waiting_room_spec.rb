@@ -30,7 +30,11 @@ RSpec.describe "As a user", type: :feature do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
       visit login_root_path
 
-      within("#login_buttons")
+      within("#login_buttons") do
+        expect(page).to have_button("Log Out")
+        expect(page).to have_button("Join Game")
+        expect(page).to have_button("Create Game")
+      end
 
       expect(page).to have_content(@user.email)
 
