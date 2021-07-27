@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  helper_method :current_user, :authorized, :logged_in
+  helper_method :current_player, :authorized, :logged_in
 
-  def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  def current_player
+    @current_player ||= Player.find(session[:player_id]) if session[:player_id]
   end
 
   def authorized
@@ -11,6 +11,6 @@ class ApplicationController < ActionController::Base
   end
 
   def logged_in
-    !!current_user
+    !!current_player
   end
 end

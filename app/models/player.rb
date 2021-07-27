@@ -1,4 +1,4 @@
-class User < ApplicationRecord
+class Player < ApplicationRecord
   validates :email, presence: true, uniqueness: true
   validates :be_id, presence: true, uniqueness: true
 end

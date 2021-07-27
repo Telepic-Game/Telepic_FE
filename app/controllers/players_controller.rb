@@ -1,11 +1,11 @@
-class UsersController < ApplicationController
+class PlayersController < ApplicationController
 
   def new
   end
 
   def create
-    # Call the service to make the user in the BE db
-    can_register = RegistrationService.register_user(
+    # Call the service to make the player in the BE db
+    can_register = RegistrationService.register_player(
       {
         email: params[:email],
         verify_email: params[:verify_email],
@@ -14,13 +14,13 @@ class UsersController < ApplicationController
       }
     )
     if can_register[:response]
-    # Find user in the FE db if it was created
-      user = User.create(
+    # Find player in the FE db if it was created
+      player = Player.create(
         email: can_register[:email],
         be_id: can_register[:be_id],
       )
-      session[:user_id] = user.id
-      flash[:success] = "Congratulations, you have successfully registered and are now logged in!\n   Usingthe email: #{user.email}"
+      session[:player_id] = player.id
+      flash[:success] = "Congratulations, you have successfully registered and are now logged in!\n   Usingthe email: #{player.email}"
       redirect_to root_path
     else
       flash[:danger] = "There was a problem registering you. Please try again."

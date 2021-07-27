@@ -1,12 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe "As a user", type: :feature do
+RSpec.describe "As a player", type: :feature do
   before :each do
-    User.destroy_all
-    TestService.clean_be_user_database
+    Player.destroy_all
+    TestService.clean_be_player_database
   end
 
-  scenario "I can register as a new user" do
+  scenario "I can register as a new player" do
     visit '/'
 
     expect(current_path).to eq('/')
@@ -38,7 +38,7 @@ RSpec.describe "As a user", type: :feature do
   end
 
   describe "Sad Path" do
-    it "User doesnt get registered with blank email" do
+    it "Player doesnt get registered with blank email" do
       visit '/register'
 
       within('#register_form') do
@@ -53,7 +53,7 @@ RSpec.describe "As a user", type: :feature do
       expect(page).to have_content("There was a problem registering you. Please try again.")
     end
 
-    it "User doesnt get registered with empty password & confirmation" do
+    it "Player doesnt get registered with empty password & confirmation" do
       visit '/register'
 
       within('#register_form') do
@@ -68,7 +68,7 @@ RSpec.describe "As a user", type: :feature do
       expect(page).to have_content("There was a problem registering you. Please try again.")
     end
 
-    it "User doesnt get registered with empty password" do
+    it "Player doesnt get registered with empty password" do
       visit '/register'
 
       within('#register_form') do
@@ -83,7 +83,7 @@ RSpec.describe "As a user", type: :feature do
       expect(page).to have_content("There was a problem registering you. Please try again.")
     end
 
-    it "User doesnt get registered with empty password confirmation" do
+    it "Player doesnt get registered with empty password confirmation" do
       visit '/register'
 
       within('#register_form') do
