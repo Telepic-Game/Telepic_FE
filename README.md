@@ -92,7 +92,7 @@ This is an example of how to list things you need to use the software and how to
 <!-- 1. Get a free API Key at [https://example.com](https://example.com)
 2. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/your_playername_/Project-Name.git
    ```
 3. Install NPM packages
    ```sh
@@ -105,7 +105,7 @@ This is an example of how to list things you need to use the software and how to
 5. To run locally use
 
    Local Connection for Development
-  local_connection: http://localhost:3001  
+  local_connection: http://localhost:3001
 
   put the above in config/application.yml
   and make sure to put application.yml into git.ignore
@@ -152,9 +152,9 @@ _For more examples, please refer to the [Documentation](https://example.com)_ --
 <!-- CONTACT -->
 ## Contact
 
-<!-- Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+<!-- Your Name - [@your_twitter](https://twitter.com/your_playername) - email@example.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name) -->
+Project Link: [https://github.com/your_playername/repo_name](https://github.com/your_playername/repo_name) -->
 
 
 

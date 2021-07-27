@@ -26,12 +26,12 @@ development:
   database: Telepic_FE_development
 
   # The specified database role being used to connect to postgres.
-  # To create additional roles in postgres see `$ createuser --help`.
+  # To create additional roles in postgres see `$ createplayer --help`.
   # When left blank, postgres will use the default role. This is
-  # the same name as the operating system user that initialized the database.
-  #username: Telepic_FE
+  # the same name as the operating system player that initialized the database.
+  #playername: Telepic_FE
 
-  # The password associated with the postgres role (username).
+  # The password associated with the postgres role (playername).
   #password:
 
   # Connect on a TCP socket. Omitted by default since the client uses a
@@ -43,7 +43,7 @@ development:
   # If your server runs on a different port number, change accordingly.
   #port: 5432
 
-  # Schema search path. The server defaults to $user,public
+  # Schema search path. The server defaults to $player,public
   #schema_search_path: myapp,sharedapp,public
 
   # Minimum log levels, in increasing order:
@@ -71,7 +71,7 @@ test:
 # On Heroku and other platform providers, you may have a full connection URL
 # available as an environment variable. For example:
 #
-#   DATABASE_URL="postgres://myuser:mypass@localhost/somedatabase"
+#   DATABASE_URL="postgres://myplayer:mypass@localhost/somedatabase"
 #
 # You can use this database configuration with:
 #
@@ -81,5 +81,5 @@ test:
 production:
   <<: *default
   database: Telepic_FE_production
-  username: Telepic_FE
+  playername: Telepic_FE
   password: <%= ENV['TELEPIC_FE_DATABASE_PASSWORD'] %>

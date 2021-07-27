@@ -1,10 +1,10 @@
 require 'rails_helper'
 
-RSpec.describe "As a user", type: :feature do
+RSpec.describe "As a player", type: :feature do
   before :each do
-    User.destroy_all
-    TestService.clean_be_user_database
-    data = RegistrationService.register_user(
+    Player.destroy_all
+    TestService.clean_be_player_database
+    data = RegistrationService.register_player(
       {
         email: "elonsmusk@gmail.com",
         verify_email: "elonsmusk@gmail.com",
@@ -12,22 +12,22 @@ RSpec.describe "As a user", type: :feature do
         password_confirmation: "1234test",
       }
     )
-    User.create(
+    Player.create(
       email: data[:email],
       be_id: data[:be_id],
     )
-    @user = User.find_by(email: "elonsmusk@gmail.com")
+    @player = Player.find_by(email: "elonsmusk@gmail.com")
   end
 
   after :each do
-    User.destroy_all
-    TestService.clean_be_user_database
+    Player.destroy_all
+    TestService.clean_be_player_database
   end
 
   describe "Happy Path" do
-    it "Registered User should be able to create waiting room" do
+    it "Registered Player should be able to create waiting room" do
 
-      allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
+      allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player)
       visit login_root_path
 
       within("#login_buttons") do
@@ -36,7 +36,7 @@ RSpec.describe "As a user", type: :feature do
         expect(page).to have_button("Create Game")
       end
 
-      expect(page).to have_content(@user.email)
+      expect(page).to have_content(@player.email)
 
     end
   end

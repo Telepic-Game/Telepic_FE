@@ -1,8 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe "As a user", type: :feature do
+RSpec.describe "As a player", type: :feature do
   before :each do
-    RegistrationService.register_user(
+    player = RegistrationService.register_player(
       {
         email: "elonsmusk@gmail.com",
         verify_email: "elonsmusk@gmail.com",
@@ -10,15 +10,19 @@ RSpec.describe "As a user", type: :feature do
         password_confirmation: "1234test",
       }
     )
+    Player.create(
+      email: player[:email],
+      be_id: player[:be_id],
+    )
   end
 
   after :each do
-    User.destroy_all
-    TestService.clean_be_user_database
+    Player.destroy_all
+    TestService.clean_be_player_database
   end
 
   describe "Happy Path" do
-    it "User should be able to log in" do
+    it "Player should be able to log in" do
       visit '/login'
 
       within "#login_form" do
@@ -37,7 +41,7 @@ RSpec.describe "As a user", type: :feature do
   end
 
   describe "Sad Path" do
-    it "User cant log in without an email" do
+    it "Player cant log in without an email" do
       visit '/login'
 
       within "#login_form" do
@@ -54,7 +58,7 @@ RSpec.describe "As a user", type: :feature do
       expect(page).to have_content("Invalid email or password")
     end
 
-    it "User cant log in without a password" do
+    it "Player cant log in without a password" do
       visit '/login'
 
       within "#login_form" do
