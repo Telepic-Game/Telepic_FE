@@ -21,7 +21,7 @@ class PlayersController < ApplicationController
       )
       session[:player_id] = player.id
       flash[:success] = "Congratulations, you have successfully registered and are now logged in!\n   Usingthe email: #{player.email}"
-      redirect_to root_path
+      redirect_to login_root_path
     else
       flash[:danger] = "There was a problem registering you. Please try again."
       render :new

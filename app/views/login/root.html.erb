@@ -2,9 +2,9 @@
   <header class="login_root_header">
     <h1>Welcome to Telepic, <%= current_player.email %>!</h1><hr><br>
       <div id='login_buttons'>
-        <%= button_to "Log Out", logout_path, method: :delete %><br>
+        <%= button_to "Create Waiting Room" %>
         <%= button_to "Join Game" %><br>
-        <%= button_to "Create Game" %>
+        <%= button_to "Log Out", logout_path, method: :delete %><br>
       </div>
   </header>
 </div>

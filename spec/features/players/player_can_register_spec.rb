@@ -33,7 +33,7 @@ RSpec.describe "As a player", type: :feature do
 
       click_button('Submit Registration!')
     end
-    expect(current_path).to eq(root_path)
+    expect(current_path).to eq(login_root_path)
     expect(page).to have_content("Congratulations, you have successfully registered and are now logged in!")
   end
 

@@ -26,6 +26,9 @@ RSpec.describe "As a player", type: :feature do
 
   describe "Happy Path" do
     it "Registered Player should be able to create waiting room" do
+      #Registered Player permission field changes from 0
+      # 0 - Guest, 1 - Registered, 2 - Host, 3 - Admin
+      # Waiting Room Player & Waiting Room are created in BE
 
       allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player)
       visit login_root_path
@@ -33,7 +36,7 @@ RSpec.describe "As a player", type: :feature do
       within("#login_buttons") do
         expect(page).to have_button("Log Out")
         expect(page).to have_button("Join Game")
-        expect(page).to have_button("Create Game")
+        expect(page).to have_button("Create Waiting Room")
       end
 
       expect(page).to have_content(@player.email)
