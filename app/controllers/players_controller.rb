@@ -20,7 +20,7 @@ class PlayersController < ApplicationController
         be_id: can_register[:be_id],
       )
       session[:player_id] = player.id
-      flash[:success] = "Congratulations, you have successfully registered and are now logged in!\n   Usingthe email: #{player.email}"
+      flash[:success] = "Congratulations, you have successfully registered and are now logged in!"
       redirect_to login_root_path
     else
       flash[:danger] = "There was a problem registering you. Please try again."

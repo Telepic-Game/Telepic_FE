@@ -12,6 +12,10 @@ Rails.application.routes.draw do
   # Delete the player
   delete '/delete_player', to: 'players#destroy', as: 'delete_player'
 
-  # After being logged in or registered
+  # After being logged in or registered, waiting_room paths
   get '/login_root', to: 'login#root', as: 'login_root'
+  get '/new_waiting_room', to: 'waiting_room#new'
+  # ? AJAX? Websocket?
+  get '/waiting_room', to: 'waiting_room#index'
+  post '/waiting_room', to: 'waiting_room#create'
 end

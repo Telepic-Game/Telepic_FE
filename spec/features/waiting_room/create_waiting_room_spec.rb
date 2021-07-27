@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "As a player", type: :feature do
   before :each do
     Player.destroy_all
-    TestService.clean_be_player_database
+    TestService.clean_be_database
     data = RegistrationService.register_player(
       {
         email: "elonsmusk@gmail.com",
@@ -21,7 +21,7 @@ RSpec.describe "As a player", type: :feature do
 
   after :each do
     Player.destroy_all
-    TestService.clean_be_player_database
+    TestService.clean_be_database
   end
 
   describe "Happy Path" do
@@ -39,8 +39,24 @@ RSpec.describe "As a player", type: :feature do
         expect(page).to have_button("Create Waiting Room")
       end
 
-      expect(page).to have_content(@player.email)
+      expect(page).to have_content("Welcome to Telepic, #{@player.email}")
 
+      click_button("Create Waiting Room")
+
+      expect(current_path).to eq(new_waiting_room_path)
+      expect(page).to have_content("Choose your Telepic username for this game!")
+      expect(page).to have_field("Enter username!")
+      expect(page).to have_field(:username)
+      fill_in "Enter username!", with: "elonsmusk"
+      click_button("Open Waiting Room")
+
+      expect(current_path).to eq(waiting_room_path)
+      expect(page).to have_content("Waiting Room")
+      expect(page).to have_content("Your room code number is:")
+      expect(page).to have_content("Username: elonsmusk")
+      expect(page).to have_content("Players in Room")
+      expect(page).to have_button("Send Invites")
+      expect(page).to have_button("Start Game")
     end
   end
 end

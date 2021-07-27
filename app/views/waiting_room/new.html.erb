@@ -1,0 +1,11 @@
+<div align="center">
+  <header class="new_waiting_room">
+    <h1>Choose your Telepic username for this game!</h1><hr><br>
+      <div id='new_waiting_room_form'>
+        <%= form_with url: '/waiting_room', local: true, method: :post do |f|%>
+          <%= f.text_field :username, placeholder: "Enter username!" %>
+          <%= f.submit "Open Waiting Room" %>
+        <% end %>
+      </div>
+  </header>
+</div>
