@@ -18,7 +18,7 @@ RSpec.describe "As a player", type: :feature do
 
   after :each do
     Player.destroy_all
-    TestService.clean_be_player_database
+    TestService.clean_be_database
   end
 
   describe "Happy Path" do

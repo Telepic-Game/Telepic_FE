@@ -14,6 +14,8 @@ class RegistrationService
       return { "response": true,
                "be_id": player_data[:data][:id],
                "email": player_data[:data][:attributes][:email] }
+    else
+      return { "response": "Unexpected Error"}
     end
   end
 end
