@@ -50,12 +50,13 @@ RSpec.describe "As a player", type: :feature do
       fill_in "Enter username!", with: "elonsmusk"
       click_button("Open Waiting Room")
 
+      save_and_open_page
+
       expect(current_path).to eq(waiting_room_path)
       expect(page).to have_content("Waiting Room")
-      expect(page).to have_content("Your room code number is:")
       expect(page).to have_content("Username: elonsmusk")
       expect(page).to have_content("Players in Room")
-      expect(page).to have_button("Send Invites")
+      expect(page).to have_content("You can send invites with your room code number:")
       expect(page).to have_button("Start Game")
     end
   end
