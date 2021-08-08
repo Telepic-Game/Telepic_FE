@@ -1,0 +1,12 @@
+<div align="center">
+  <header class="join_waiting_room">
+    <h1>Welcome to Telepic!</h1><hr><br>
+      <div id='join_waiting_room_form'>
+        <%= form_with url: '/create_waiting_room_player', local: true, method: :post do |f|%>
+          <%= f.text_field :username, placeholder: "Enter username" %>
+          <%= f.text_field :room_code, placeholder: "Enter Room Code" %>
+          <%= f.submit "Join Waiting Room" %>
+        <% end %>
+      </div>
+  </header>
+</div>
