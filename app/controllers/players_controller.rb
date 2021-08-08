@@ -13,12 +13,13 @@ class PlayersController < ApplicationController
         password_confirmation: params[:password_confirmation],
       }
     )
-    if can_register[:response]
+    if can_register[:response] && can_register[:permissions] == "registered"
     # Find player in the FE db if it was created
       player = Player.create(
         email: can_register[:email],
         be_id: can_register[:be_id],
       )
+      # require "pry"; binding.pry
       session[:player_id] = player.id
       flash[:success] = "Congratulations, you have successfully registered and are now logged in!"
       redirect_to login_root_path

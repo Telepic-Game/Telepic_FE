@@ -13,7 +13,9 @@ class RegistrationService
     elsif player_data[:data]
       return { "response": true,
                "be_id": player_data[:data][:id],
-               "email": player_data[:data][:attributes][:email] }
+               "email": player_data[:data][:attributes][:email],
+               "permissions": player_data[:data][:attributes][:permissions]
+             }
     else
       return { "response": "Unexpected Error"}
     end

@@ -7,7 +7,11 @@
   <br>
   <h3>Players in Room</h3>
 
-
+  <% if @all_players %>
+    <% @all_players.each do |player| %>
+      <%= player[:username] %>
+    <% end %>
+  <% end %>
 
   <%= button_to "Start Game" %>
 </div>

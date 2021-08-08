@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   get '/login_root', to: 'login#root', as: 'login_root'
   get '/new_waiting_room', to: 'waiting_room#new'
   # ? AJAX? Websocket?
+  # 'waiting_room#index' is the waiting room all players will use
   get '/waiting_room', to: 'waiting_room#index'
   post '/waiting_room', to: 'waiting_room#create'
+  get '/join_game', to: 'waiting_room#join_game'
+  post '/create_waiting_room_player', to: 'waiting_room#create_waiting_room_player'
 end
