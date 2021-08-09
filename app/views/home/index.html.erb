@@ -7,12 +7,12 @@
     <div id='index_btn'>
     <% if logged_in %>
       <%= button_to "Log Out", logout_path, method: :delete %><br>
-      <%= button_to "Join Game" %><br>
+      <%= button_to "Join Game", join_game_path, method: :get %><br>
       <%= button_to "Create Game" %>
     <% else %>
       <%= button_to "Login", login_new_path, method: :get %><br>
       <%= button_to "Register", register_path, method: :get %><br>
-      <%= button_to "Join Game" %><br>
+      <%= button_to "Join Game", join_game_path, method: :get %><br>
     <% end %>
     </div>
   </div>
