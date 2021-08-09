@@ -13,8 +13,8 @@ class WaitingRoomController < ApplicationController
   def new
   end
 
-# create waiting room and host player
   def create
+    # Create waiting room and host player
     waiting_room = WaitingRoomService.open_back_end_waiting_room(current_player.email, params[:username])
     # Add permissions to the player
     if waiting_room
