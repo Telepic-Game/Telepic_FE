@@ -27,13 +27,20 @@ class WaitingRoomController < ApplicationController
 
   def create_waiting_room_player
     current_player ? email = current_player.email : email = nil
-    waiting_room = WaitingRoomService.join_back_end_waiting_room(
+    response = WaitingRoomService.join_back_end_waiting_room(
       email,
       params[:username],
       params[:room_code]
       )
     # from response, if permissions are 0. maybe create player on FE & session
-    if waiting_room
+    if response[:data][:attributes][:player][:permissions] == 'guest'
+      guest = Player.create(
+        email: response[:data][:attributes][:player][:player_username],
+        be_id: response[:data][:attributes][:player][:player_id]
+      )
+      session[:player_id] = guest.id
+      redirect_to waiting_room_path
+    elsif response[:data][:attributes][:player][:permissions] == 'registered'
       redirect_to waiting_room_path
     else
       redirect_to join_game_path

@@ -19,7 +19,6 @@ class PlayersController < ApplicationController
         email: can_register[:email],
         be_id: can_register[:be_id],
       )
-      # require "pry"; binding.pry
       session[:player_id] = player.id
       flash[:success] = "Congratulations, you have successfully registered and are now logged in!"
       redirect_to login_root_path
