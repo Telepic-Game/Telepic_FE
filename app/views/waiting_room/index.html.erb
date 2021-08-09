@@ -13,5 +13,7 @@
     <% end %>
   <% end %>
 
-  <%= button_to "Start Game" %>
+  <% if current_player.permissions == 'host' %>
+    <%= button_to "Start Game" %>
+  <% end %>
 </div>

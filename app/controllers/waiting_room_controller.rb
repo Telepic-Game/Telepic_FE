@@ -12,10 +12,13 @@ class WaitingRoomController < ApplicationController
 
   def new
   end
+
 # create waiting room and host player
   def create
     waiting_room = WaitingRoomService.open_back_end_waiting_room(current_player.email, params[:username])
+    # Add permissions to the player
     if waiting_room
+      current_player.permissions = 'host'
       redirect_to waiting_room_path
     else
       render :new
@@ -39,8 +42,10 @@ class WaitingRoomController < ApplicationController
         be_id: response[:data][:attributes][:player][:player_id]
       )
       session[:player_id] = guest.id
+      current_player.permissions = 'guest'
       redirect_to waiting_room_path
     elsif response[:data][:attributes][:player][:permissions] == 'registered'
+      current_player.permissions = 'registered'
       redirect_to waiting_room_path
     else
       redirect_to join_game_path

@@ -58,7 +58,7 @@ RSpec.describe "As a guest player", type: :feature do
       expect(page).to have_content("elonsmusk")
       expect(page).to have_content("Players in Room")
       expect(page).to have_content("You can send invites with your room code number: #{@waiting_room_1[:data][:attributes][:waiting_room][:room_code]}")
-      expect(page).to have_button("Start Game")
+      expect(page).not_to have_button("Start Game")
     end
   end
   describe 'Sad Path' do
