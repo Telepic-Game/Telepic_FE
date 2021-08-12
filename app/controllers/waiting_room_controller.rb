@@ -41,7 +41,7 @@ class WaitingRoomController < ApplicationController
     if response[:data][:attributes][:player][:permissions] == 'guest'
       guest = Player.create(
         email: response[:data][:attributes][:player][:player_username],
-        be_id: response[:data][:attributes][:player][:player_id]
+        be_id: response[:data][:attributes][:player][:id]
       )
       session[:player_id] = guest.id
       current_player.permissions = 'guest'
