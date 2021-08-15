@@ -9,8 +9,13 @@ class GamesController < ApplicationController
 
     response.dig(:data, :attributes, :game_players).each do |player|
       p = Player.find_by(be_id: player[:id])
-      require "pry"; binding.pry
-      s = p.stacks.create
+      s = Stack.create(player_id: p.id)
+      rounds.times do
+        s.cards.create
+      end
     end
+    require "pry"; binding.pry
+    #redirect_to rounds_path
+    #Use Hotwire
   end
 end

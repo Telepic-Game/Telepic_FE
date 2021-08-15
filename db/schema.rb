@@ -16,12 +16,12 @@ ActiveRecord::Schema.define(version: 2021_08_15_194251) do
   enable_extension "plpgsql"
 
   create_table "cards", force: :cascade do |t|
-    t.bigint "stacks_id"
+    t.bigint "stack_id"
     t.string "name"
     t.json "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["stacks_id"], name: "index_cards_on_stacks_id"
+    t.index ["stack_id"], name: "index_cards_on_stack_id"
   end
 
   create_table "players", force: :cascade do |t|
@@ -39,6 +39,6 @@ ActiveRecord::Schema.define(version: 2021_08_15_194251) do
     t.index ["player_id"], name: "index_stacks_on_player_id"
   end
 
-  add_foreign_key "cards", "stacks", column: "stacks_id"
+  add_foreign_key "cards", "stacks"
   add_foreign_key "stacks", "players"
 end

@@ -58,6 +58,8 @@ RSpec.describe "When a new game is created", type: :feature do
   end
 
   after :each do
+    Card.destroy_all
+    Stack.destroy_all
     Player.destroy_all
     TestService.clean_be_database
   end
