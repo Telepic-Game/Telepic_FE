@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   get '/new_waiting_room', to: 'waiting_room#new'
   # ? AJAX? Websocket?
   # 'waiting_room#index' is the waiting room all players will use
-  mount ActionCable.server => "/waiting_room"
-  # get '/waiting_room', to: 'waiting_room#index'
+  mount ActionCable.server => "/cable"
+  get '/waiting_room', to: 'waiting_room#index'
   post '/waiting_room', to: 'waiting_room#create'
   get '/join_game', to: 'waiting_room#join_game'
   post '/create_waiting_room_player', to: 'waiting_room#create_waiting_room_player'

@@ -3,13 +3,12 @@ class WaitingRoomController < ApplicationController
     @waiting_room = WaitingRoomService.get_back_end_waiting_room(current_player.email)
     # Need to grab game from backend for status
     @game = @waiting_room.dig(:data, :attributes, :game)
-    require "pry"; binding.pry
     if @game[:active] == false
       @username = @waiting_room[:data][:attributes][:player]  [:current_player][:username]
       @room_code = @waiting_room[:data][:attributes][:waiting_room] [:room_code]
       @all_players = @waiting_room[:data][:attributes][:player] [:all_players]
     elsif @game[:active] == true
-      # redirect_to game_start_path
+      redirect_to start_game_path
     end
   end
 

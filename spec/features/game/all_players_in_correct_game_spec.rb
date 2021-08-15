@@ -63,7 +63,7 @@ RSpec.describe "When a new game is created", type: :feature do
   end
 
   describe "Happy Path" do
-    it "Host clicks ~Start Game~ and sees round 1 page" do
+    it "Host, non-host Registered, and Guest clicks ~Start Game~ and sees round 1 page" do
       allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player)
       visit waiting_room_path
 
@@ -74,15 +74,11 @@ RSpec.describe "When a new game is created", type: :feature do
       visit waiting_room_path
 
       expect(current_path).to eq(start_game_path)
+
+      allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player_3)
+      visit waiting_room_path
+
+      expect(current_path).to eq(start_game_path)
     end
-    # it "Host clicks ~Start Game~ and registered non-host sees round 1 page" do
-    # end
-    # it "Host clicks ~Start Game~ and Guest sees round 1 page" do
-    #   allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player)
-    #   visit waiting_room_path
-    #
-    #   click_button('Start Game')
-    #   expect(current_path).to eq(start_game_path)
-    # end
   end
 end
