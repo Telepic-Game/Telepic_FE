@@ -81,6 +81,37 @@ RSpec.describe "When a new game is created", type: :feature do
       visit waiting_room_path
 
       expect(current_path).to eq(start_game_path)
+      # allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player)
+      # visit waiting_room_path
+      #
+      # expect(current_path).to eq(waiting_room_path)
+      #
+      # allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player_2)
+      # visit waiting_room_path
+      #
+      # expect(current_path).to eq(waiting_room_path)
+      #
+      # allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player_3)
+      # visit waiting_room_path
+      #
+      # expect(current_path).to eq(waiting_room_path)
+      #
+      # allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player)
+      # visit waiting_room_path
+      #
+      # click_button('Start Game')
+      # expect(current_path).to eq(start_game_path)
+      #
+      # allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player_2)
+      #
+      # visit waiting_room_path
+      #
+      # expect(current_path).to eq(start_game_path)
+
+      # allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player_3)
+      # visit waiting_room_path
+      #
+      # expect(current_path).to eq(start_game_path)
     end
   end
 end

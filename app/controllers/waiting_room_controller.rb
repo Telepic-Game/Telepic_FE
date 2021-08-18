@@ -1,6 +1,8 @@
 class WaitingRoomController < ApplicationController
   def index
-    @waiting_room = WaitingRoomService.get_back_end_waiting_room(current_player.email)
+# require "pry"; binding.pry
+    @waiting_room =
+     WaitingRoomService.get_back_end_waiting_room(current_player.email)
     # Need to grab game from backend for status
     @game = @waiting_room.dig(:data, :attributes, :game)
     if @game[:active] == false
