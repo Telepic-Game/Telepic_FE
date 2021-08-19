@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_09_181030) do
+ActiveRecord::Schema.define(version: 2021_08_15_194251) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "cards", force: :cascade do |t|
+    t.bigint "stack_id"
+    t.string "name"
+    t.json "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["stack_id"], name: "index_cards_on_stack_id"
+  end
 
   create_table "players", force: :cascade do |t|
     t.string "email"
@@ -23,4 +32,13 @@ ActiveRecord::Schema.define(version: 2021_08_09_181030) do
     t.string "permissions"
   end
 
+  create_table "stacks", force: :cascade do |t|
+    t.bigint "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["player_id"], name: "index_stacks_on_player_id"
+  end
+
+  add_foreign_key "cards", "stacks"
+  add_foreign_key "stacks", "players"
 end

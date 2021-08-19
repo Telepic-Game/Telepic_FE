@@ -44,9 +44,10 @@ RSpec.describe "As the host", type: :feature do
       'eros',
       @waiting_room_1[:data][:attributes][:waiting_room][:room_code],
     )
+    # require "pry"; binding.pry
     Player.create(
       email: guest[:data][:attributes][:player][:player_username],
-      be_id: guest[:data][:attributes][:player][:player_id],
+      be_id: guest[:data][:attributes][:player][:id],
       permissions: 'guest',
     )
     @player_3 = Player.find_by(email: 'eros')
@@ -63,7 +64,7 @@ RSpec.describe "As the host", type: :feature do
       expect(page).to have_content('taoistcowboy')
       expect(page).to have_content('eros')
     end
-    it 'See a button to start game, a registered player, and a guest player as taoist' do
+    it 'See a registered player, and a guest player as taoist' do
       allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player_2)
 
       visit waiting_room_path
@@ -73,7 +74,7 @@ RSpec.describe "As the host", type: :feature do
       expect(page).to have_content('taoistcowboy')
       expect(page).to have_content('eros')
     end
-    it 'See a button to start game, a registered player, and a guest player as the guest' do
+    it 'See a registered player, and a guest player as the guest' do
       allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player_3)
 
       visit waiting_room_path
