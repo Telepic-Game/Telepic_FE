@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
         email: params[:email],
         password_digest: params[:password],
       }
-    )
+      )
     if login == true
       player = Player.find_by(email: params[:email])
       session[:player_id] = player.id
