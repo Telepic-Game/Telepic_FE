@@ -23,6 +23,7 @@ class WaitingRoomController < ApplicationController
     # Add permissions to the player
     if waiting_room
       current_player.permissions = 'host'
+      current_player.save
       redirect_to waiting_room_path
     else
       render :new
@@ -47,9 +48,11 @@ class WaitingRoomController < ApplicationController
       )
       session[:player_id] = guest.id
       current_player.permissions = 'guest'
+      current_player.save
       redirect_to waiting_room_path
     elsif response[:data][:attributes][:player][:permissions] == 'registered'
       current_player.permissions = 'registered'
+      current_player.save
       redirect_to waiting_room_path
     else
       redirect_to join_game_path

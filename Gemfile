@@ -48,6 +48,8 @@ gem 'faraday'
 
 gem 'securerandom'
 
+# gem 'hotwire'
+
 group :development, :test do
   gem 'pry'
   gem 'rspec-rails'

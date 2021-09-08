@@ -2,6 +2,7 @@ class LoginService
   extend Connection
 
   def self.player_login(input)
+    # require "pry"; binding.pry
     conn = connect
     response = conn.post('/api/v1/login') do |req|
       req.headers['Content-Type'] = 'application/json'
