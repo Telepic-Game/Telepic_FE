@@ -5,13 +5,12 @@ class PlayersController < ApplicationController
 
   def create
     if (params[:password].match(/(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!*()_-])(?=.*[0-9])/)) && (params[:verify_email] == params[:email]) && (params[:password] == params[:password_confirmation]) && !params[:email].blank? && !params[:verify_email].blank?
-    player = Player.create(
-      {
-        email: params[:email],
-        permissions: "registered"
-      }
-    )
-# require "pry"; binding.pry
+      player = Player.create(
+        {
+          email: params[:email],
+          permissions: "registered"
+        }
+      )
       session[:player_id] = player.id
       flash[:success] = "Congratulations, you have successfully registered and are now logged in!"
       redirect_to login_root_path
