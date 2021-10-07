@@ -4,7 +4,7 @@ class PlayersController < ApplicationController
   end
 
   def create
-    if (params[:password].match(/(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!*()_-])(?=.*[0-9])/)) && (params[:verify_email] == params[:email]) && (params[:password] == params[:password_confirmation])
+    if (params[:password].match(/(?=.{8,})(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=!*()_-])(?=.*[0-9])/)) && (params[:verify_email] == params[:email]) && (params[:password] == params[:password_confirmation]) && !params[:email].blank? && !params[:verify_email].blank?
     player = Player.create(
       {
         email: params[:email],
