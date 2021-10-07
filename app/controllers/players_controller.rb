@@ -14,18 +14,19 @@ class PlayersController < ApplicationController
       #     password_confirmation: params[:password_confirmation],
       #   }
       # )
-      can_register = Player.create(
+      player = Player.create(
         {
-          email: params[:email]
+          email: params[:email],
+          permissions: "registered"
         }
       )
       require "pry"; binding.pry
-      if can_register[:response] && can_register[:permissions] == "registered"
-      # Find player in the FE db if it was created
-        player = Player.create(
-          email: can_register[:email],
-          be_id: can_register[:be_id],
-        )
+      # if can_register[:response] && can_register[:permissions] == "registered"
+      # # Find player in the FE db if it was created
+      #   player = Player.create(
+      #     email: can_register[:email],
+      #     be_id: can_register[:be_id],
+        # )
         session[:player_id] = player.id
         flash[:success] = "Congratulations, you have successfully registered and are now logged in!"
         redirect_to login_root_path
@@ -33,9 +34,9 @@ class PlayersController < ApplicationController
         flash[:danger] = "There was a problem registering you. Please try again."
         render :new
       end
-    else
-      flash[:danger] = "There was a problem registering you. Please try again."
-      render :new
-    end
+    # else
+    #   flash[:danger] = "There was a problem registering you. Please try again."
+    #   render :new
+    # end
   end
 end

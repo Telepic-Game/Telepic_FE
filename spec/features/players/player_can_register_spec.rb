@@ -35,9 +35,9 @@ RSpec.describe "As a player", type: :feature do
       fill_in :password_confirmation, with: '!1234Abc'
 
       click_button('Submit Registration!')
-    # end
-    #
-    # expect(current_path).to eq(login_root_path)
+    end
+
+    expect(current_path).to eq(login_root_path)
     # expect(page).to have_content("Congratulations, you have successfully registered and are now logged in!")
   end
 
@@ -269,5 +269,5 @@ RSpec.describe "As a player", type: :feature do
   #     expect(current_path).to eq('/register')
   #     expect(page).to have_content("There was a problem registering you. Please try again.")
   #   end
-  end
+  # end
 end
