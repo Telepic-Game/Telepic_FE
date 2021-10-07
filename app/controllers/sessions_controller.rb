@@ -4,20 +4,19 @@ class SessionsController < ApplicationController
   end
 
   def create
-     # Call the service to log in verify player info on the BE db
-    # login = LoginService.player_login(
-    #   {
-    #     email: params[:email],
-    #     password_digest: params[:password],
-    #   }
-    #   )
-    # if login == true
     if !(Player.find_by(email: params[:email])).nil?
       player = Player.find_by(email: params[:email])
-      session[:player_id] = player.id
-      flash[:success] = "You have been logged in successfully!"
-      redirect_to login_root_path
-    # elsif login == false
+    end
+
+    if player
+      if player.password == params[:password]
+        session[:player_id] = player.id
+        flash[:success] = "You have been logged in successfully!"
+        redirect_to login_root_path
+      else
+        flash[:danger] = "Invalid email or password"
+        redirect_to login_new_path
+      end
     else
       flash[:danger] = "Invalid email or password"
       redirect_to login_new_path
