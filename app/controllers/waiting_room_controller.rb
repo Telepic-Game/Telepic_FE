@@ -2,6 +2,8 @@ class WaitingRoomController < ApplicationController
   def index
 # require "pry"; binding.pry
     @username = current_player.waiting_room_player.username
+    @room_code = current_player.waiting_room.room_code
+    @all_players = current_player.waiting_room.players
     # @waiting_room =
     #  WaitingRoomService.get_back_end_waiting_room(current_player.email)
     # # Need to grab game from backend for status
