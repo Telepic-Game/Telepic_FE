@@ -4,7 +4,7 @@ class WaitingRoomController < ApplicationController
     @username = current_player.waiting_room_player.username
     @room_code = current_player.waiting_room.room_code
     @all_players = current_player.waiting_room.players
-    require "pry"; binding.pry
+    # require "pry"; binding.pry
     # @waiting_room =
     #  WaitingRoomService.get_back_end_waiting_room(current_player.email)
     # # Need to grab game from backend for statusp
@@ -19,10 +19,25 @@ class WaitingRoomController < ApplicationController
   end
 
   def new
+    if current_player.nil?
+      player = Player.new(
+        {
+          email: "guest",
+          permissions: "guest"
+        }
+      )
+      if player.save
+        session[:player_id] = player.id
+        flash[:success] = "Congratulations, you have joined as a new Guest!"
+        redirect_to new_waiting_room_path
+      end
+    end
   end
 
   def create
+    current_player.permissions = "host"
     waiting_room = WaitingRoom.new
+    # require "pry"; binding.pry
     if waiting_room.save
       # current_player.permissions = 'host'
       current_player.save
