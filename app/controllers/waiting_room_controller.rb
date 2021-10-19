@@ -1,10 +1,11 @@
 class WaitingRoomController < ApplicationController
   def index
-# require "pry"; binding.pry
-    @username = current_player.waiting_room_player.username
+require "pry"; binding.pry
+    @username = Player.where(id: current_player.waiting_room_player.player_id)
+     # current_player.waiting_room_player.username
     @room_code = current_player.waiting_room.room_code
     @all_players = current_player.waiting_room.players
-    # require "pry"; binding.pry
+    require "pry"; binding.pry
     # @waiting_room =
     #  WaitingRoomService.get_back_end_waiting_room(current_player.email)
     # # Need to grab game from backend for statusp
@@ -35,7 +36,9 @@ class WaitingRoomController < ApplicationController
   end
 
   def create
+    require "pry"; binding.pry
     current_player.permissions = "host"
+    current_player[:username] = params[:username]
     waiting_room = WaitingRoom.new
     # require "pry"; binding.pry
     if waiting_room.save
