@@ -5,7 +5,8 @@ RSpec.describe "As a player", type: :feature do
     host = Player.create(
       {
         email: "elonsmusk@gmail.com",
-        password: "1234test"
+        # password: "1234test"
+        permissions: "registered"
       }
     )
     @player = Player.find_by(email: "elonsmusk@gmail.com")

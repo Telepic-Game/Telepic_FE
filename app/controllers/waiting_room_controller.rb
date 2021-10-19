@@ -4,9 +4,10 @@ class WaitingRoomController < ApplicationController
     @username = current_player.waiting_room_player.username
     @room_code = current_player.waiting_room.room_code
     @all_players = current_player.waiting_room.players
+    require "pry"; binding.pry
     # @waiting_room =
     #  WaitingRoomService.get_back_end_waiting_room(current_player.email)
-    # # Need to grab game from backend for status
+    # # Need to grab game from backend for statusp
     # @game = @waiting_room.dig(:data, :attributes, :game)
     # if @game[:active] == false
     #   @username = @waiting_room[:data][:attributes][:player]  [:current_player][:username]
@@ -23,7 +24,7 @@ class WaitingRoomController < ApplicationController
   def create
     waiting_room = WaitingRoom.new
     if waiting_room.save
-      current_player.permissions = 'host'
+      # current_player.permissions = 'host'
       current_player.save
       waiting_room_player = WaitingRoomPlayer.new(
         waiting_room_id: waiting_room.id,
