@@ -2,15 +2,15 @@
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
 #
-# Note that this schema.rb definition is the authoritative source for your
-# database schema. If you need to create the application database on another
-# system, you should be using db:schema:load, not running all the migrations
-# from scratch. The latter is a flawed and unsustainable approach (the more migrations
-# you'll amass, the slower it'll run and the greater likelihood for issues).
+# This file is the source Rails uses to define your schema when running `bin/rails
+# db:schema:load`. When creating a new database, `bin/rails db:schema:load` tends to
+# be faster and is potentially less error prone than running all of your
+# migrations from scratch. Old migrations may fail to apply correctly if those
+# migrations use external dependencies or application code.
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_15_194251) do
+ActiveRecord::Schema.define(version: 2021_10_26_171803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,10 +26,12 @@ ActiveRecord::Schema.define(version: 2021_08_15_194251) do
 
   create_table "players", force: :cascade do |t|
     t.string "email"
-    t.string "be_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "permissions"
+    t.string "password"
+    t.string "username"
+    t.string "room_code"
   end
 
   create_table "stacks", force: :cascade do |t|
@@ -39,6 +41,25 @@ ActiveRecord::Schema.define(version: 2021_08_15_194251) do
     t.index ["player_id"], name: "index_stacks_on_player_id"
   end
 
+  create_table "waiting_room_players", force: :cascade do |t|
+    t.bigint "waiting_room_id", null: false
+    t.bigint "player_id", null: false
+    t.string "username"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "room_code"
+    t.index ["player_id"], name: "index_waiting_room_players_on_player_id"
+    t.index ["waiting_room_id"], name: "index_waiting_room_players_on_waiting_room_id"
+  end
+
+  create_table "waiting_rooms", force: :cascade do |t|
+    t.string "room_code"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   add_foreign_key "cards", "stacks"
   add_foreign_key "stacks", "players"
+  add_foreign_key "waiting_room_players", "players"
+  add_foreign_key "waiting_room_players", "waiting_rooms"
 end

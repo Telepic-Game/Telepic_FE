@@ -188,3 +188,26 @@ Project Link: [https://github.com/your_playername/repo_name](https://github.com/
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/othneildrew
 [product-screenshot]: images/screenshot.png -->
+
+
+
+
+<!--
+
+
+Hotwire instructions for Stimulus and Turbo -
+
+
+rails hotwire:install
+Create controllers directory
+      create  app/javascript/controllers
+      create  app/javascript/controllers/index.js
+      create  app/javascript/controllers/application.js
+      create  app/javascript/controllers/hello_controller.js
+You must import "./controllers" in your JavaScript entrypoint
+Install Stimulus
+         run  yarn add @hotwired/stimulus from "."
+You must import @hotwired/turbo-rails in your JavaScript entrypoint file
+Install Turbo
+         run  yarn add @hotwired/turbo-rails from "."
+Run turbo:install:redis to switch on Redis and use it in development for turbo streams -->

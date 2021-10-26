@@ -1,9 +1,10 @@
 class Player < ApplicationRecord
-  validates :email, presence: true, uniqueness: true
-  validates :be_id, presence: true, uniqueness: true
-  # require "pry"; binding.pry
-  # validates :password, :format => {:with => /^(?=.*[a-zA-Z])(?=.*[0-9]).{6,}$/, multiline: true, message: "There was a problem registering you. Please try again."}
-
+  # validates :id, presence: true, uniqueness: true
+  validates :email, presence: true
+  # , uniqueness: true
+  # validates :be_id, presence: true, uniqueness: true
+  has_one :waiting_room_player
+  has_one :waiting_room, through: :waiting_room_player
   has_one :stack
   has_many :cards, through: :stack
 end

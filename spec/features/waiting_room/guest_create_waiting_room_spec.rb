@@ -2,14 +2,14 @@ require 'rails_helper'
 
 RSpec.describe "As a player", type: :feature do
   before :each do
-    host = Player.create(
+    guest = Player.create(
       {
-        email: "elonsmusk@gmail.com",
+        email: "guest",
         # password: "1234test"
-        permissions: "registered"
+        permissions: "guest"
       }
     )
-    @player = Player.find_by(email: "elonsmusk@gmail.com")
+    @player = Player.find(guest.id)
   end
 
   after :each do
@@ -19,10 +19,7 @@ RSpec.describe "As a player", type: :feature do
   end
 
   describe "Happy Path" do
-    it "Registered Player should be able to create waiting room" do
-      #Registered Player permission field changes from 0
-      # 0 - Guest, 1 - Registered, 2 - Host, 3 - Admin
-      # Waiting Room Player & Waiting Room are created in BE
+    it "Guest Player should be able to create waiting room" do
 
       allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player)
       visit login_root_path
@@ -49,6 +46,7 @@ RSpec.describe "As a player", type: :feature do
       expect(page).to have_content("Username: elonsmusk")
       expect(page).to have_content("Players in Room")
       expect(page).to have_content("You can send invites with your room code number:")
+      save_and_open_page
       expect(page).to have_button("Start Game")
     end
   end

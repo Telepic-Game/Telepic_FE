@@ -1,0 +1,9 @@
+<%= turbo_frame_tag dom_id(waiting_room) do %>
+  <div class="room"
+    <% if @all_players %>
+      <% @all_players.each do |player| %>
+        <%= player[:username] %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

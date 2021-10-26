@@ -2,23 +2,17 @@ require 'rails_helper'
 
 RSpec.describe "As a player", type: :feature do
   before :each do
-    player = RegistrationService.register_player(
+    player = Player.create(
       {
         email: "elonsmusk@gmail.com",
-        verify_email: "elonsmusk@gmail.com",
-        password: "1234test",
-        password_confirmation: "1234test",
+        password: "1234test"
       }
-    )
-    Player.create(
-      email: player[:email],
-      be_id: player[:be_id],
     )
   end
 
   after :each do
     Player.destroy_all
-    TestService.clean_be_database
+    # TestService.clean_be_database
   end
 
   describe "Happy Path" do
