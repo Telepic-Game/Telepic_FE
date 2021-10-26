@@ -21,7 +21,8 @@ Rails.application.routes.draw do
   get '/waiting_room', to: 'waiting_room#index'
   post '/waiting_room', to: 'waiting_room#create'
   get '/join_game', to: 'waiting_room#join_game'
-  post '/create_waiting_room_player', to: 'waiting_room#create_waiting_room_player'
+
+  post '/create_waiting_room_player', to: 'waiting_room_player#create'
 
   # Game routes
   get '/start_game', to: 'games#start', as: 'start_game'

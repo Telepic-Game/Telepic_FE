@@ -27,7 +27,8 @@ class WaitingRoomController < ApplicationController
       )
       if player.save
         session[:player_id] = player.id
-        flash[:success] = "Congratulations, you have joined as a new Guest!"
+        flash[:success] = "Congratulations, you have created a waiting room as a new Guest!"
+        player.save
         redirect_to new_waiting_room_path
       end
     end
@@ -60,28 +61,14 @@ class WaitingRoomController < ApplicationController
   end
 
   # def create_waiting_room_player
-  #   current_player ? email = current_player.email : email = nil
-  #   response = WaitingRoomService.join_back_end_waiting_room(
-  #     email,
-  #     params[:username],
-  #     params[:room_code]
-  #     )
-  #   # from response, if permissions are 0. maybe create player on FE & session
-  #   if response[:data][:attributes][:player][:permissions] == 'guest'
-  #     guest = Player.create(
-  #       email: response[:data][:attributes][:player][:player_username],
-  #       be_id: response[:data][:attributes][:player][:id]
-  #     )
-  #     session[:player_id] = guest.id
-  #     current_player.permissions = 'guest'
-  #     current_player.save
+  #   require "pry"; binding.pry
+  #   waiting_room_player ||= WaitingRoomPlayer.new(
+  #     waiting_room_id: params[:room_code],
+  #     player_id: Player.where(id: current_player.waiting_room_player.player_id).last.id,
+  #     username: params[:username]
+  #   )
+  #   if waiting_room_player.save
   #     redirect_to waiting_room_path
-  #   elsif response[:data][:attributes][:player][:permissions] == 'registered'
-  #     current_player.permissions = 'registered'
-  #     current_player.save
-  #     redirect_to waiting_room_path
-  #   else
-  #     redirect_to join_game_path
   #   end
   # end
 end

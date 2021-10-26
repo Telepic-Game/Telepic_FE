@@ -1,0 +1,7 @@
+<% turbo_frame_tag dom_id(todo) do %>
+  <% if @all_players %>
+    <% @all_players.each do |player| %>
+      <%= player[:username] %>
+    <% end %>
+  <% end %>
+<% end %>

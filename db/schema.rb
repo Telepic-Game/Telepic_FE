@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_19_204332) do
+ActiveRecord::Schema.define(version: 2021_10_20_001924) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 2021_10_19_204332) do
     t.string "username"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "room_code"
     t.index ["player_id"], name: "index_waiting_room_players_on_player_id"
     t.index ["waiting_room_id"], name: "index_waiting_room_players_on_waiting_room_id"
   end
