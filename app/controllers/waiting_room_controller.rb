@@ -1,22 +1,11 @@
 class WaitingRoomController < ApplicationController
   def index
-    @current_user = Player.where(id: current_player.id)
-    @username = @current_user.last.username
-    @all_players = current_player.waiting_room.players
-    if current_player.permissions == "host"
-      @room_code = current_player.waiting_room.room_code
-    end
-    # @waiting_room =
-    #  WaitingRoomService.get_back_end_waiting_room(current_player.email)
-    # # Need to grab game from backend for statusp
-    # @game = @waiting_room.dig(:data, :attributes, :game)
-    # if @game[:active] == false
-    #   @username = @waiting_room[:data][:attributes][:player]  [:current_player][:username]
-    #   @room_code = @waiting_room[:data][:attributes][:waiting_room] [:room_code]
-    #   @all_players = @waiting_room[:data][:attributes][:player] [:all_players]
-    # elsif @game[:active] == true
-    #   redirect_to start_game_path
-    # end
+    @current_user_id = current_player.id
+    @username = current_player.username
+    @all_players = current_player.waiting_room.players.map do |player|
+                     player.username
+                   end.uniq
+    @room_code = current_player.room_code
   end
 
   def new
@@ -60,18 +49,5 @@ class WaitingRoomController < ApplicationController
   end
 
   def join_game
-    # require "pry"; binding.pry
   end
-
-  # def create_waiting_room_player
-  #   require "pry"; binding.pry
-  #   waiting_room_player ||= WaitingRoomPlayer.new(
-  #     waiting_room_id: params[:room_code],
-  #     player_id: Player.where(id: current_player.waiting_room_player.player_id).last.id,
-  #     username: params[:username]
-  #   )
-  #   if waiting_room_player.save
-  #     redirect_to waiting_room_path
-  #   end
-  # end
 end
