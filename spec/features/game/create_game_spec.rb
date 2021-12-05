@@ -1,61 +1,60 @@
-require 'rails_helper'
+# require 'rails_helper'
 
-RSpec.describe "As a host player", type: :feature do
-  before :each do
-    Player.destroy_all
-    TestService.clean_be_database
-    data = RegistrationService.register_player(
-      {
-        email: "elonsmusk@gmail.com",
-        verify_email: "elonsmusk@gmail.com",
-        password: "1234test",
-        password_confirmation: "1234test",
-      }
-    )
-    Player.create(
-      email: data[:email],
-      be_id: data[:be_id],
-      permissions: 'host',
-    )
-    @player = Player.find_by(email: "elonsmusk@gmail.com")
-  end
+# RSpec.describe "As a host player", type: :feature do
+#   before :each do
+#     Player.destroy_all
+#     data = RegistrationService.register_player(
+#       {
+#         email: "elonsmusk@gmail.com",
+#         verify_email: "elonsmusk@gmail.com",
+#         password: "1234test",
+#         password_confirmation: "1234test",
+#       }
+#     )
+#     Player.create(
+#       email: data[:email],
+#       be_id: data[:be_id],
+#       permissions: 'host',
+#     )
+#     @player = Player.find_by(email: "elonsmusk@gmail.com")
+#   end
 
-  after :each do
-    Player.destroy_all
-    TestService.clean_be_database
-  end
+#   after :each do
+#     Player.destroy_all
+#     TestService.clean_be_database
+#   end
 
-  describe "Happy Path" do
-    it "When waiting room is made, inactive game & player game are both created" do
-      allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player)
-      visit login_root_path
+#   describe "Happy Path" do
+#     it "When waiting room is made, inactive game & player game are both created" do
+#       allow_any_instance_of(ApplicationController).to receive(:current_player).and_return(@player)
+#       visit login_root_path
 
-      within("#login_buttons") do
-        expect(page).to have_button("Log Out")
-        expect(page).to have_button("Join Game")
-        expect(page).to have_button("Create Waiting Room")
-      end
+#       within("#login_buttons") do
+#         expect(page).to have_button("Log Out")
+#         expect(page).to have_button("Join Game")
+#         expect(page).to have_button("Create Waiting Room")
+#       end
 
-      expect(page).to have_content("Welcome to Telepic, #{@player.email}")
+#       expect(page).to have_content("Welcome to Telepic, #{@player.email}")
 
-      click_button("Create Waiting Room")
+#       click_button("Create Waiting Room")
 
-      expect(current_path).to eq(new_waiting_room_path)
+#       expect(current_path).to eq(new_waiting_room_path)
 
-      expect(page).to have_content("Choose your Telepic username for this game!")
-      expect(page).to have_field("Enter username!")
-      expect(page).to have_field(:username)
+#       expect(page).to have_content("Choose your Telepic username for this game!")
+#       expect(page).to have_field("Enter username!")
+#       expect(page).to have_field(:username)
 
-      fill_in "Enter username!", with: "elonsmusk"
+#       fill_in "Enter username!", with: "elonsmusk"
 
-      click_button("Open Waiting Room")
+#       click_button("Open Waiting Room")
 
-      expect(current_path).to eq(waiting_room_path)
-      expect(page).to have_content("Waiting Room")
-      expect(page).to have_content("Username: elonsmusk")
-      expect(page).to have_content("Players in Room")
-      expect(page).to have_content("You can send invites with your room code number:")
-      expect(page).to have_button("Start Game")
-    end
-  end
-end
+#       expect(current_path).to eq(waiting_room_path)
+#       expect(page).to have_content("Waiting Room")
+#       expect(page).to have_content("Username: elonsmusk")
+#       expect(page).to have_content("Players in Room")
+#       expect(page).to have_content("You can send invites with your room code number:")
+#       expect(page).to have_button("Start Game")
+#     end
+#   end
+# end
