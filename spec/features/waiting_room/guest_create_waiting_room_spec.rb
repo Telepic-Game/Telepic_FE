@@ -46,7 +46,7 @@ RSpec.describe "As a player", type: :feature do
       expect(page).to have_content("Username: elonsmusk")
       expect(page).to have_content("Players in Room")
       expect(page).to have_content("You can send invites with your room code number:")
-      save_and_open_page
+      # save_and_open_page
       expect(page).to have_button("Start Game")
     end
   end
