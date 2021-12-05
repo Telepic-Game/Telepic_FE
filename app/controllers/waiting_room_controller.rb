@@ -6,6 +6,8 @@ class WaitingRoomController < ApplicationController
                      player.username
                    end.uniq
     @room_code = current_player.room_code
+    @waiting_room_players = WaitingRoomPlayer.all
+    @waiting_room_player = WaitingRoomPlayer.new
   end
 
   def new
@@ -26,20 +28,29 @@ class WaitingRoomController < ApplicationController
   end
 
   def create
+    
     current_player.permissions = "host"
     current_player[:username] = params[:username]
     waiting_room = WaitingRoom.new
     # require "pry"; binding.pry
     if waiting_room.save
+      
+      current_player.room_code = waiting_room.room_code
       # current_player.permissions = 'host'
       current_player.save
-      waiting_room_player = WaitingRoomPlayer.new(
+      @waiting_room_player = WaitingRoomPlayer.new(
         waiting_room_id: waiting_room.id,
         player_id: current_player.id,
         username: params[:username]
       )
-      if waiting_room_player.save
-        redirect_to waiting_room_path
+      if @waiting_room_player.save
+        respond_to do |format|
+          if waiting_room.save
+            format.html { redirect_to waiting_room_url, notice: 'Guest has been added.' }
+            format.json { render :show, status: :created, location: @waiting_room_player }
+          end
+        end 
+        # redirect_to waiting_room_path
       else
         render :new
       end
