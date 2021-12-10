@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_player, :authorized, :logged_in
 
   def current_player
+    # require "pry"; binding.pry
     @current_player ||= Player.find(session[:player_id]) if session[:player_id]
   end
 

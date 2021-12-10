@@ -24,6 +24,23 @@ RSpec.describe "Waiting Room - Hotwire Tests", type: :feature do
       fill_in :room_code, with: room_code
       click_button "Join Waiting Room"
 
+      expect(current_path).to eq(waiting_room_path)
+
+      visit root_path
+      click_button "Join Game"
+      fill_in :username, with: "Kyle Schulz"
+      fill_in :room_code, with: room_code
+      click_button "Join Waiting Room"
+
+      expect(current_path).to eq(waiting_room_path)
+
+      group = find_all('div#waiting_room_player').to_a
+
+      expect(group.last.text).to eq('Kyle Schulz')
+      expect(group.second.text).to eq('Kris Litman')
+      expect(group.first.text).to eq('Jordan Beck')
+      expect(current_path).to eq(waiting_room_path)
+
       # Continue Here!
     end
   end
