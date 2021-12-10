@@ -23,19 +23,23 @@ class WaitingRoomPlayerController < ApplicationController
     end
     waiting_room = WaitingRoom.find_by(room_code: params[:room_code])
     player = Player.find(current_player.id)
-    waiting_room_player = WaitingRoomPlayer.new(
-      {
-        waiting_room_id: waiting_room.id,
-        player_id: player.id,
-        permissions: player.permissions,
-        username: params[:username],
-        room_code: waiting_room.room_code
-      }
-    )
-    if waiting_room_player.save
-      redirect_to waiting_room_path
-    else
-      redirect_to root_path
+    player.waiting_room_id = waiting_room.id
+    # require "pry"; binding.pry
+    if player.save
+      waiting_room_player = WaitingRoomPlayer.new(
+        {
+          waiting_room_id: waiting_room.id,
+          player_id: player.id,
+          permissions: player.permissions,
+          username: params[:username],
+          room_code: waiting_room.room_code
+        }
+      )
+      if waiting_room_player.save
+        redirect_to waiting_room_path
+      else
+        redirect_to root_path
+      end
     end
   end
 end
