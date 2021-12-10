@@ -23,10 +23,6 @@ class WaitingRoomPlayerController < ApplicationController
     end
     waiting_room = WaitingRoom.find_by(room_code: params[:room_code])
     player = Player.find(current_player.id)
-    # require "pry"; binding.pry
-    #can we get permissions into waiting room player here?
-
-    require "pry"; binding.pry
     waiting_room_player = WaitingRoomPlayer.new(
       {
         waiting_room_id: waiting_room.id,

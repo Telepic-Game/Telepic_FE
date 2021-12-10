@@ -15,7 +15,7 @@
   <% end %>
 
 
-  <% if current_player.permissions == "host" %>
+  <% if current_player.permissions %>
     <%= button_to "Start Game", start_game_path, method: :get, params: { "waiting_room_code": @room_code } %>
   <% end %>
 </div>

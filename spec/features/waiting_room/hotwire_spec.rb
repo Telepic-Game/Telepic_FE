@@ -41,10 +41,12 @@ RSpec.describe "Waiting Room - Hotwire Tests", type: :feature do
       expect(group.second.text).to eq('Kris Litman')
       expect(group.first.text).to eq('Jordan Beck')
       expect(current_path).to eq(waiting_room_path)
-      require "pry"; binding.pry
-#change permissions to host so click becomes available
 
-# save_and_open_page
+      WaitingRoomPlayer.last.permissions.gsub("guest", "host")
+
+      visit waiting_room_path
+require "pry"; binding.pry
+save_and_open_page
 
 # visit waiting_room_path for host "Jordan", and click on "Start Game"
 
