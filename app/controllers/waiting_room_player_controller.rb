@@ -26,11 +26,12 @@ class WaitingRoomPlayerController < ApplicationController
     # require "pry"; binding.pry
     #can we get permissions into waiting room player here?
 
+    require "pry"; binding.pry
     waiting_room_player = WaitingRoomPlayer.new(
       {
         waiting_room_id: waiting_room.id,
         player_id: player.id,
-        permissisons: player.permissions,
+        permissions: player.permissions,
         username: params[:username],
         room_code: waiting_room.room_code
       }

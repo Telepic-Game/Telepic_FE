@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "Waiting Room - Hotwire Tests", type: :feature do
   after :all do
+    WaitingRoomPlayer.destroy_all
     WaitingRoom.destroy_all
     WaitingRoomPlayer.destroy_all
     Player.destroy_all
