@@ -34,6 +34,8 @@ class WaitingRoomController < ApplicationController
     if waiting_room.save
 
       current_player.room_code = waiting_room.room_code
+      current_player.waiting_room_id = waiting_room.id
+      require "pry"; binding.pry
       # current_player.permissions = 'host'
       current_player.save
       @waiting_room_player = WaitingRoomPlayer.new(

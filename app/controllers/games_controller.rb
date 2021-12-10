@@ -1,8 +1,14 @@
 class GamesController < ApplicationController
   def start
+    # @game_players = WaitingRoomPlayer.where(room_code: current_player.room_code)
+    @game_players = WaitingRoomPlayer.where(waiting_room_id: current_player.room_code)
+    # waiting_room = WaitingRoom.find(id: )
     require "pry"; binding.pry
+
     #get rid of service, create game model?
-    # response = GameService.start_game(
+
+
+  # response = GameService.start_game(
     #   current_player.email,
     #   params[:waiting_room_code]
     # )

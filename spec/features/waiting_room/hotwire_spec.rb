@@ -42,10 +42,9 @@ RSpec.describe "Waiting Room - Hotwire Tests", type: :feature do
       expect(group.first.text).to eq('Jordan Beck')
       expect(current_path).to eq(waiting_room_path)
 
-      WaitingRoomPlayer.last.permissions.gsub("guest", "host")
+      # WaitingRoomPlayer.last.permissions.gsub("guest", "host")
 
-      visit waiting_room_path
-require "pry"; binding.pry
+      click_on("Start Game")
 save_and_open_page
 
 # visit waiting_room_path for host "Jordan", and click on "Start Game"
