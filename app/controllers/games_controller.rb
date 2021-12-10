@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
   def start
+    #get rid of service, create game model?
     response = GameService.start_game(
       current_player.email,
       params[:waiting_room_code]
@@ -17,7 +18,7 @@ class GamesController < ApplicationController
           s.cards.create
         end
       end
-    end 
+    end
     #redirect_to rounds_path
     #Use Hotwire
   end
