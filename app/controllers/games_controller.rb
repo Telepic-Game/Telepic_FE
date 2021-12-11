@@ -64,7 +64,7 @@ class GamesController < ApplicationController
 
 
     #each member in @game_players needs to be assigned a stack with cards equal to players in game. Might be easiest to make guard statements for 3,4,5,6,7,8 people seperately. then make it dynamic later.
-    #seperate model for stack, and card, still  needed 
+    #still needed - seperate model for stack, where Card.create will be called, and card will be a view with a canvas eventually, for now, card will be a view with a form to type in 
     #each card should be labeled with the round number, current players username, and also include a short few words of instruction
 
 
