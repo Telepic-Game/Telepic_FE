@@ -8,8 +8,10 @@ class WaitingRoomController < ApplicationController
     @room_code = current_player.room_code
     @waiting_room_players = current_player.waiting_room.waiting_room_players
     @waiting_room_player = WaitingRoomPlayer.new
-    #player model needs game atribute
-    @game = current_player.game
+    # @game_players = WaitingRoomPlayer.where(waiting_room_id: current_player.waiting_room_id)
+    @game_id = current_player.game_id
+    @game = Game.where(id: @game_id.to_i)
+    @game_status = @game.first.game_active
   end
 
   def new
@@ -34,8 +36,19 @@ class WaitingRoomController < ApplicationController
     current_player[:username] = params[:username]
     waiting_room = WaitingRoom.new
     if waiting_room.save
-      game = waiting_room.game.create
+      game = Game.create(waiting_room_id: "#{waiting_room.id}", game_players:
+               {
+                 "data": [
+                   {
+                     "game_players": [current_player],
+                   }
+                 ]
+               }
+             )
+     # game.game_players.dig("data")[0].dig("game_players")[0].dig("id")
+             # require "pry"; binding.pry
       # game.players.push(current_player)
+      current_player.game_id = game.id
       current_player.room_code = waiting_room.room_code
       current_player.waiting_room_id = waiting_room.id
       # current_player.permissions = 'host'

@@ -24,7 +24,6 @@ class WaitingRoomPlayerController < ApplicationController
     waiting_room = WaitingRoom.find_by(room_code: params[:room_code])
     player = Player.find(current_player.id)
     player.waiting_room_id = waiting_room.id
-    # require "pry"; binding.pry
     if player.save
       waiting_room_player = WaitingRoomPlayer.new(
         {

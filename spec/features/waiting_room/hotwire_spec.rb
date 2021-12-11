@@ -47,6 +47,8 @@ RSpec.describe "Waiting Room - Hotwire Tests", type: :feature do
       click_on("Start Game")
 save_and_open_page
 
+# add ready up button to view and logic in the waiting room controller
+
 # visit waiting_room_path for host "Jordan", and click on "Start Game"
 
 #expect current_path to eq(game_path#show(current_user.card_1))

@@ -1,6 +1,6 @@
 <div align="center">
   <header class="waiting_room">
-    <% if game.start? %>
+    <% if @game_status == false %>
       <h1>Waiting Room</h1><hr><br>
     </header>
     <h3>You can send invites with your room code number: <%= @room_code %></h3>
