@@ -10,8 +10,12 @@ class WaitingRoomController < ApplicationController
     @waiting_room_player = WaitingRoomPlayer.new
     # @game_players = WaitingRoomPlayer.where(waiting_room_id: current_player.waiting_room_id)
     @game_id = current_player.game_id
-    @game = Game.where(id: @game_id.to_i)
-    @game_status = @game.first.game_active
+    @game = (Game.where(id: @game_id.to_i)).first
+    @game_status = false
+  end
+
+  def game_active
+    @game.game_active
   end
 
   def new
@@ -48,6 +52,7 @@ class WaitingRoomController < ApplicationController
      # game.game_players.dig("data")[0].dig("game_players")[0].dig("id")
              # require "pry"; binding.pry
       # game.players.push(current_player)
+
       current_player.game_id = game.id
       current_player.room_code = waiting_room.room_code
       current_player.waiting_room_id = waiting_room.id

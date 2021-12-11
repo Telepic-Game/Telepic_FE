@@ -6,6 +6,7 @@ class WaitingRoomPlayerController < ApplicationController
   end
 
   def create
+    waiting_room = WaitingRoom.find_by(room_code: params[:room_code])
     current_player = Player.new(
       {
         email: "guest",
@@ -13,7 +14,8 @@ class WaitingRoomPlayerController < ApplicationController
         updated_at: params[:updated_at],
         permissions: "guest",
         username: params[:username],
-        room_code: params[:room_code]
+        room_code: params[:room_code],
+        waiting_room_id: waiting_room.id.to_i
       }
     )
     if current_player.save
@@ -21,7 +23,7 @@ class WaitingRoomPlayerController < ApplicationController
       flash[:success] = "Congratulations, you have joined a waiting room as a Guest!"
       current_player.save
     end
-    waiting_room = WaitingRoom.find_by(room_code: params[:room_code])
+    # waiting_room = WaitingRoom.find_by(room_code: params[:room_code])
     player = Player.find(current_player.id)
     player.waiting_room_id = waiting_room.id
     if player.save
