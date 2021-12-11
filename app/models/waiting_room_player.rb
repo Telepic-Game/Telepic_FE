@@ -1,6 +1,7 @@
 class WaitingRoomPlayer < ApplicationRecord
   belongs_to :player
   belongs_to :waiting_room
+  belongs_to :game
 
   validates :username, presence: true
 
