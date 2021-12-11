@@ -5,6 +5,7 @@ class WaitingRoom < ApplicationRecord
 
   has_many :waiting_room_players
   has_many :players, through: :waiting_room_players
+  has_one :game
 
   private
 

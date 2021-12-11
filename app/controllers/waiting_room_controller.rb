@@ -8,6 +8,8 @@ class WaitingRoomController < ApplicationController
     @room_code = current_player.room_code
     @waiting_room_players = current_player.waiting_room.waiting_room_players
     @waiting_room_player = WaitingRoomPlayer.new
+    #player model needs game atribute
+    @game = current_player.game
   end
 
   def new
@@ -32,7 +34,8 @@ class WaitingRoomController < ApplicationController
     current_player[:username] = params[:username]
     waiting_room = WaitingRoom.new
     if waiting_room.save
-
+      game = waiting_room.game.create
+      # game.players.push(current_player)
       current_player.room_code = waiting_room.room_code
       current_player.waiting_room_id = waiting_room.id
       # current_player.permissions = 'host'

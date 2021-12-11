@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_10_201406) do
+ActiveRecord::Schema.define(version: 2021_12_11_182613) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 2021_12_10_201406) do
     t.index ["stack_id"], name: "index_cards_on_stack_id"
   end
 
+  create_table "games", force: :cascade do |t|
+    t.boolean "game_active", default: false
+    t.boolean "all_players_ready", default: false
+    t.bigint "waiting_room_id", null: false
+    t.jsonb "game_players"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["waiting_room_id"], name: "index_games_on_waiting_room_id"
+  end
+
   create_table "players", force: :cascade do |t|
     t.string "email"
     t.datetime "created_at", null: false
@@ -33,6 +43,8 @@ ActiveRecord::Schema.define(version: 2021_12_10_201406) do
     t.string "username"
     t.string "room_code"
     t.bigint "waiting_room_id"
+    t.boolean "player_ready", default: false
+    t.string "game_id"
   end
 
   create_table "stacks", force: :cascade do |t|
@@ -61,6 +73,7 @@ ActiveRecord::Schema.define(version: 2021_12_10_201406) do
   end
 
   add_foreign_key "cards", "stacks"
+  add_foreign_key "games", "waiting_rooms"
   add_foreign_key "stacks", "players"
   add_foreign_key "waiting_room_players", "players"
   add_foreign_key "waiting_room_players", "waiting_rooms"
