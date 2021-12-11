@@ -42,12 +42,12 @@ RSpec.describe "Waiting Room - Hotwire Tests", type: :feature do
       expect(group.first.text).to eq('Jordan Beck')
       expect(current_path).to eq(waiting_room_path)
 
-      # WaitingRoomPlayer.last.permissions.gsub("guest", "host")
-
       click_on("Start Game")
 save_and_open_page
 
-# add ready up button to view and logic in the waiting room controller
+# We will not be able to have a player ready up in waiting room, unless we have a hard counter for a pre determined amount of players, which could make some of the other code easier, not having to be dynamic.
+
+#next step is to use hotwire, to direct al players to the portion of the view which is for gameplay, aka round one. I wonder if wrapping the entire index.html.erb in the waiting room views, as a conditional based on the status of game_active?
 
 # visit waiting_room_path for host "Jordan", and click on "Start Game"
 

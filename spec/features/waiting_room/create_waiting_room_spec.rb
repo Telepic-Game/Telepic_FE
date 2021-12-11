@@ -46,7 +46,7 @@ RSpec.describe "As a player", type: :feature do
       click_button("Open Waiting Room")
 
       expect(current_path).to eq(waiting_room_path)
-      # save_and_open_page
+
       expect(page).to have_content("Waiting Room")
       expect(page).to have_content("Username: elonsmusk")
       expect(page).to have_content("Players in Room")
