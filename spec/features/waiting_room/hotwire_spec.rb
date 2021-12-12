@@ -17,7 +17,7 @@ RSpec.describe "Waiting Room - Hotwire Tests", type: :feature do
 # save_and_open_page
       expect(page.first('div#waiting_room_player').text).to eq('Jordan Beck')
 
-      within 'div#player_count'
+      within 'div#player_count' do
         expect(page).to have_content("3 Player Game")
       end
 

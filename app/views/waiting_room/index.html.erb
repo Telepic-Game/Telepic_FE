@@ -6,6 +6,13 @@
     <h3>You can send invites with your room code number: <%= @room_code %></h3>
     <h3>Username: <%= @username %></h3>
     <br>
+    <div id="player_count" style="background: cyan; width: 300px; padding: 10px;">
+      <h3>Expected Player Count</h3>
+      <%= waiting_room.player_count %>
+      <br>
+    </div>
+    <br>
+
     <h3>Players in Room</h3>
 
     <%= turbo_stream_from "waiting_room_players" %>
