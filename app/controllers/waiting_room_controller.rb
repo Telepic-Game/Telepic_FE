@@ -11,7 +11,8 @@ class WaitingRoomController < ApplicationController
     # @game_players = WaitingRoomPlayer.where(waiting_room_id: current_player.waiting_room_id)
     @game_id = current_player.game_id
     @game = (Game.where(id: @game_id.to_i)).first
-    @game_status = false,
+    @game_status = false
+    @expected_player_count = "#{ current_player.waiting_room.player_count } Player Game"
   end
 
   def game_active
@@ -39,7 +40,8 @@ class WaitingRoomController < ApplicationController
     current_player.permissions = "host"
     current_player[:username] = params[:username]
     waiting_room = WaitingRoom.new
-    waiting_room[:player_count] = params[:player_count]
+    waiting_room[:player_count] = params[:player_count].to_i
+    # require "pry"; binding.pry
     if waiting_room.save
       game = Game.create(waiting_room_id: "#{waiting_room.id}", game_players:
                {

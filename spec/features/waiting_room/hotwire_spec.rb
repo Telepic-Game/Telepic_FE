@@ -14,7 +14,7 @@ RSpec.describe "Waiting Room - Hotwire Tests", type: :feature do
       fill_in :username, with: "Jordan Beck"
       fill_in :player_count, with: 3
       click_button "Open Waiting Room"
-# save_and_open_page
+save_and_open_page
       expect(page.first('div#waiting_room_player').text).to eq('Jordan Beck')
 
       within 'div#player_count' do
