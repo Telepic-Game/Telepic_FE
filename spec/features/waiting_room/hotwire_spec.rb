@@ -12,9 +12,15 @@ RSpec.describe "Waiting Room - Hotwire Tests", type: :feature do
       visit root_path
       click_button "Start Waiting Room as a Guest"
       fill_in :username, with: "Jordan Beck"
+      fill_in :player_count, with: 3
       click_button "Open Waiting Room"
 # save_and_open_page
       expect(page.first('div#waiting_room_player').text).to eq('Jordan Beck')
+
+      within 'div#player_count'
+        expect(page).to have_content("3 Player Game")
+      end
+
       expect(current_path).to eq(waiting_room_path)
 
       room_code = WaitingRoom.first.room_code
