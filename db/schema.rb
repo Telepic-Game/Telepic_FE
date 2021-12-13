@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_13_161751) do
+ActiveRecord::Schema.define(version: 2021_12_13_163930) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 2021_12_13_161751) do
     t.string "room_code"
     t.string "permissions"
     t.integer "stack_count"
+    t.integer "card_count"
     t.index ["player_id"], name: "index_waiting_room_players_on_player_id"
     t.index ["waiting_room_id"], name: "index_waiting_room_players_on_waiting_room_id"
   end
