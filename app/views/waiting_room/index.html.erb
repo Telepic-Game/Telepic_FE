@@ -1,21 +1,40 @@
-<div align="center">
-  <header class="waiting_room">
-    <h1>Waiting Room</h1><hr><br>
-  </header>
-  <h3>You can send invites with your room code number: <%= @room_code %></h3>
-  <h3>Username: <%= @username %></h3>
-  <br>
-  <h3>Players in Room</h3>
+<% @game_status = true if (@waiting_room_players.count >= @epc) %>
+  <div align="center">
+    <header class="waiting_room">
+    <% if @game_status == false %>
+      <h1>Waiting Room</h1><hr><br>
+      </header>
+      <h3>You can send invites with your room code number: <%= @room_code %></h3>
+      <h3>Username: <%= @username %></h3>
+      <br>
+      <div id="player_count" style="background: cyan; width: 300px; padding: 10px;">
+        <h3>Expected Player Count</h3>
+        <%= @expected_player_count %>
+        <h3>Count of players we're waiting for still</h3>
+        <%= @epc - @waiting_room_players.count %>
+        <br>
+      </div>
+      <br>
 
+      <h3>Players in Room</h3>
 
-  <%= turbo_stream_from "waiting_room_players" %>
+      <%= turbo_stream_from "waiting_room_players" %>
 
-  <%= turbo_frame_tag "waiting_room_players" do %>
-    <%= render @waiting_room_players %>
-  <% end %>
+      <%= turbo_frame_tag "waiting_room_players" do %>
+        <%= render @waiting_room_players %>
+      <% end %>
 
+      <% if current_player.permissions %>
+        <%= button_to "Start Game", start_game_path, method: :get, params: { "waiting_room_code": @room_code } %>
+      <% end %>
 
-  <% if current_player.permissions == "host" %>
-    <%= button_to "Start Game", start_game_path, method: :get, params: { "waiting_room_code": @room_code } %>
-  <% end %>
-</div>
+    <% else %>
+
+      <%= turbo_stream_from "waiting_room_players" %>
+
+      <%= turbo_frame_tag "waiting_room_players" do %>
+        <%= render @waiting_room_player %>
+      <% end %>
+
+    <% end %>
+  </div>

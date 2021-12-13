@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_26_171803) do
+ActiveRecord::Schema.define(version: 2021_12_12_175623) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 2021_10_26_171803) do
     t.index ["stack_id"], name: "index_cards_on_stack_id"
   end
 
+  create_table "games", force: :cascade do |t|
+    t.boolean "game_active", default: false
+    t.boolean "all_players_ready", default: false
+    t.bigint "waiting_room_id", null: false
+    t.jsonb "game_players"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["waiting_room_id"], name: "index_games_on_waiting_room_id"
+  end
+
   create_table "players", force: :cascade do |t|
     t.string "email"
     t.datetime "created_at", null: false
@@ -32,6 +42,9 @@ ActiveRecord::Schema.define(version: 2021_10_26_171803) do
     t.string "password"
     t.string "username"
     t.string "room_code"
+    t.bigint "waiting_room_id"
+    t.boolean "player_ready", default: false
+    t.string "game_id"
   end
 
   create_table "stacks", force: :cascade do |t|
@@ -48,6 +61,7 @@ ActiveRecord::Schema.define(version: 2021_10_26_171803) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "room_code"
+    t.string "permissions"
     t.index ["player_id"], name: "index_waiting_room_players_on_player_id"
     t.index ["waiting_room_id"], name: "index_waiting_room_players_on_waiting_room_id"
   end
@@ -56,9 +70,11 @@ ActiveRecord::Schema.define(version: 2021_10_26_171803) do
     t.string "room_code"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "player_count"
   end
 
   add_foreign_key "cards", "stacks"
+  add_foreign_key "games", "waiting_rooms"
   add_foreign_key "stacks", "players"
   add_foreign_key "waiting_room_players", "players"
   add_foreign_key "waiting_room_players", "waiting_rooms"

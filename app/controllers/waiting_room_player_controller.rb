@@ -6,6 +6,7 @@ class WaitingRoomPlayerController < ApplicationController
   end
 
   def create
+    waiting_room = WaitingRoom.find_by(room_code: params[:room_code])
     current_player = Player.new(
       {
         email: "guest",
@@ -13,28 +14,34 @@ class WaitingRoomPlayerController < ApplicationController
         updated_at: params[:updated_at],
         permissions: "guest",
         username: params[:username],
-        room_code: params[:room_code]
+        room_code: params[:room_code],
+        waiting_room_id: waiting_room.id.to_i
       }
     )
     if current_player.save
+      require "pry"; binding.pry
       session[:player_id] = current_player.id
-      flash[:success] = "Congratulations, you have joined a waiting room as a Guest!"
+      # flash[:success] = "Congratulations, you have joined a waiting room as a Guest!"
       current_player.save
     end
-    waiting_room = WaitingRoom.find_by(room_code: params[:room_code])
+    # waiting_room = WaitingRoom.find_by(room_code: params[:room_code])
     player = Player.find(current_player.id)
-    waiting_room_player = WaitingRoomPlayer.new(
-      {
-        waiting_room_id: waiting_room.id,
-        player_id: player.id,
-        username: params[:username],
-        room_code: waiting_room.room_code
-      }
-    )
-    if waiting_room_player.save
-      redirect_to waiting_room_path
-    else
-      redirect_to root_path
+    player.waiting_room_id = waiting_room.id
+    if player.save
+      waiting_room_player = WaitingRoomPlayer.new(
+        {
+          waiting_room_id: waiting_room.id,
+          player_id: player.id,
+          permissions: player.permissions,
+          username: params[:username],
+          room_code: waiting_room.room_code
+        }
+      )
+      if waiting_room_player.save
+        redirect_to waiting_room_path
+      else
+        redirect_to root_path
+      end
     end
   end
 end

@@ -4,6 +4,7 @@
       <div id='new_waiting_room_form'>
         <%= form_with url: '/waiting_room', local: true, method: :post do |f|%>
           <%= f.text_field :username, placeholder: "Enter username!" %>
+          <%= f.text_field :player_count, placeholder: "Enter the total amount of players" %>
           <%= f.submit "Open Waiting Room" %>
         <% end %>
       </div>

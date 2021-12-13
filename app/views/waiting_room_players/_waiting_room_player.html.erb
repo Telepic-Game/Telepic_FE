@@ -1,6 +1,10 @@
 <%= turbo_frame_tag dom_id(waiting_room_player) do %>
   <div id="waiting_room_player" style="background: lightgrey; width: 300px; padding: 10px;">
-    <%= waiting_room_player.username %>
+    <% if @game_status == false %>
+      <%= waiting_room_player.username %>
+    <% else %>
+      <%= "Welcome to Round 1!" %>
+    <% end %>
     <br>
   </div>
   <br>

@@ -8,6 +8,16 @@ class WaitingRoomController < ApplicationController
     @room_code = current_player.room_code
     @waiting_room_players = current_player.waiting_room.waiting_room_players
     @waiting_room_player = WaitingRoomPlayer.new
+    # @game_players = WaitingRoomPlayer.where(waiting_room_id: current_player.waiting_room_id)
+    @game_id = current_player.game_id
+    @game = (Game.where(id: @game_id.to_i)).first
+    @game_status = false
+    @expected_player_count = "#{ current_player.waiting_room.player_count } Player Game"
+    @epc = current_player.waiting_room.player_count
+  end
+
+  def game_active
+    @game.game_active
   end
 
   def new
@@ -20,6 +30,7 @@ class WaitingRoomController < ApplicationController
       )
       if player.save
         session[:player_id] = player.id
+        # require "pry"; binding.pry
         flash[:success] = "Congratulations, you have created a waiting room as a new Guest!"
         player.save
         redirect_to new_waiting_room_path
@@ -31,9 +42,25 @@ class WaitingRoomController < ApplicationController
     current_player.permissions = "host"
     current_player[:username] = params[:username]
     waiting_room = WaitingRoom.new
+    waiting_room[:player_count] = params[:player_count].to_i
+    # require "pry"; binding.pry
     if waiting_room.save
+      game = Game.create(waiting_room_id: "#{waiting_room.id}", game_players:
+               {
+                 "data": [
+                   {
+                     "game_players": [current_player],
+                   }
+                 ]
+               }
+             )
+     # game.game_players.dig("data")[0].dig("game_players")[0].dig("id")
+             # require "pry"; binding.pry
+      # game.players.push(current_player)
 
+      current_player.game_id = game.id
       current_player.room_code = waiting_room.room_code
+      current_player.waiting_room_id = waiting_room.id
       # current_player.permissions = 'host'
       current_player.save
       @waiting_room_player = WaitingRoomPlayer.new(
