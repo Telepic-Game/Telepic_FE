@@ -29,6 +29,10 @@
       <% end %>
 
     <% else %>
+      <% require "pry"; binding.pry %>
+      <% if @game_status == true %>
+        <% @waiting_room_players.map { |player| player.stack_count = @epc } %>
+      <% end %>
 
       <%= turbo_stream_from "waiting_room_players" %>
 
