@@ -13,6 +13,7 @@ class WaitingRoomController < ApplicationController
     @game = (Game.where(id: @game_id.to_i)).first
     @game_status = false
     @expected_player_count = "#{ current_player.waiting_room.player_count } Player Game"
+    @epc = current_player.waiting_room.player_count
   end
 
   def game_active
@@ -29,6 +30,7 @@ class WaitingRoomController < ApplicationController
       )
       if player.save
         session[:player_id] = player.id
+        # require "pry"; binding.pry
         flash[:success] = "Congratulations, you have created a waiting room as a new Guest!"
         player.save
         redirect_to new_waiting_room_path

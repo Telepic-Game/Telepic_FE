@@ -14,7 +14,7 @@ RSpec.describe "Waiting Room - Hotwire Tests", type: :feature do
       fill_in :username, with: "Jordan Beck"
       fill_in :player_count, with: 3
       click_button "Open Waiting Room"
-save_and_open_page
+
       expect(page.first('div#waiting_room_player').text).to eq('Jordan Beck')
 
       within 'div#player_count' do
@@ -38,18 +38,18 @@ save_and_open_page
       fill_in :username, with: "Kyle Schulz"
       fill_in :room_code, with: room_code
       click_button "Join Waiting Room"
-
+save_and_open_page
       expect(current_path).to eq(waiting_room_path)
 
       group = find_all('div#waiting_room_player').to_a
-
+# require "pry"; binding.pry # Needs timer here, to move from waiting room, to round 1? Maybe a ready up? Get rid of flash message,
       expect(group.last.text).to eq('Kyle Schulz')
       expect(group.second.text).to eq('Kris Litman')
       expect(group.first.text).to eq('Jordan Beck')
       expect(current_path).to eq(waiting_room_path)
 
       click_on("Start Game")
-save_and_open_page
+
 
 # We will not be able to have a player ready up in waiting room, unless we have a hard counter for a pre determined amount of players, which could make some of the other code easier, not having to be dynamic.
 
