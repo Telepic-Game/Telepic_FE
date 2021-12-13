@@ -1,4 +1,4 @@
-<% @game_status = true if (@waiting_room_players.count >= @epc) %>
+<% @game_status = true if (@ready_up_counter >= @epc) %>
   <div align="center">
     <header class="waiting_room">
     <% if @game_status == false %>
@@ -22,19 +22,14 @@
 
       <%= turbo_frame_tag "waiting_room_players" do %>
         <%= render @waiting_room_players %>
-      <% end %>
-
-      <% if current_player.permissions %>
-        <%= button_to "Start Game", start_game_path, method: :get, params: { "waiting_room_code": @room_code } %>
+        <%= form_with url: '/waiting_room', local: true, method: :upate do |f|%>
+          <%= f.label "Ready?", :value => "Yes"  %>
+          <%= f.radio_button "Ready", true%>
+          <%= f.submit "Click to Ready Up after clicking bubble for, Ready?" %>
+        <% end %>
       <% end %>
 
     <% else %>
-      <% if @game_status == true %>
-        <% @waiting_room_players.map { |player| player.stack_count = @epc } %>
-        <% @waiting_room_players.map { |player| player.card_count = (@epc * 2)  } %>
-      <% end %>
-
-      <% require "pry"; binding.pry %>
 
       <%= turbo_stream_from "waiting_room_players" %>
 

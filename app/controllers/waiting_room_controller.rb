@@ -14,7 +14,12 @@ class WaitingRoomController < ApplicationController
     @game_status = false
     @expected_player_count = "#{ current_player.waiting_room.player_count } Player Game"
     @epc = current_player.waiting_room.player_count
+    @ready_up_counter = 0
   end
+
+  # def create_stacks_and_cards
+  #   @waiting_room_players.map { |player| Stack.create(cards: (@epc * 2) times do Card.create ) = @epc }
+  # end
 
   def game_active
     @game.game_active
@@ -38,6 +43,11 @@ class WaitingRoomController < ApplicationController
     end
   end
 
+  def update_ready_up_count
+    @ready_up_counter = @ready_up_counter + 1
+    require "pry"; binding.pry
+  end
+
   def create
     current_player.permissions = "host"
     current_player[:username] = params[:username]
@@ -54,9 +64,6 @@ class WaitingRoomController < ApplicationController
                  ]
                }
              )
-     # game.game_players.dig("data")[0].dig("game_players")[0].dig("id")
-             # require "pry"; binding.pry
-      # game.players.push(current_player)
 
       current_player.game_id = game.id
       current_player.room_code = waiting_room.room_code
