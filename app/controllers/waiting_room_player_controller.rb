@@ -19,8 +19,9 @@ class WaitingRoomPlayerController < ApplicationController
       }
     )
     if current_player.save
+      require "pry"; binding.pry
       session[:player_id] = current_player.id
-      flash[:success] = "Congratulations, you have joined a waiting room as a Guest!"
+      # flash[:success] = "Congratulations, you have joined a waiting room as a Guest!"
       current_player.save
     end
     # waiting_room = WaitingRoom.find_by(room_code: params[:room_code])
