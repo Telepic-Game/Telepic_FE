@@ -25,7 +25,9 @@
         <%= form_with url: '/waiting_room', local: true, method: :upate do |f|%>
           <%= f.label "Ready?", :value => "Yes"  %>
           <%= f.radio_button "Ready", true%>
-          <%= f.submit "Click to Ready Up after clicking bubble for, Ready?" %>
+            <div id="ready_button">
+              <%= f.submit "Click to Ready Up after clicking bubble for, Ready?" %>
+            </div>
         <% end %>
       <% end %>
 

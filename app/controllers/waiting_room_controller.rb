@@ -43,7 +43,7 @@ class WaitingRoomController < ApplicationController
     end
   end
 
-  def update_ready_up_count
+  def update
     @ready_up_counter = @ready_up_counter + 1
     require "pry"; binding.pry
   end
