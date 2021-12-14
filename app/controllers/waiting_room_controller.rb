@@ -17,6 +17,11 @@ class WaitingRoomController < ApplicationController
     @ready_up_counter = 0
   end
 
+  def update
+    require "pry"; binding.pry
+    @ready_up_counter = @ready_up_counter + 1
+  end
+
   # def create_stacks_and_cards
   #   @waiting_room_players.map { |player| Stack.create(cards: (@epc * 2) times do Card.create ) = @epc }
   # end
@@ -41,11 +46,6 @@ class WaitingRoomController < ApplicationController
         redirect_to new_waiting_room_path
       end
     end
-  end
-
-  def update
-    @ready_up_counter = @ready_up_counter + 1
-    require "pry"; binding.pry
   end
 
   def create

@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   # mount ActionCable.server => "/cable"
   get '/waiting_room', to: 'waiting_room#index'
   post '/waiting_room', to: 'waiting_room#create'
+  put '/waiting_room', to: 'waiting_room#update'
   get '/join_game', to: 'waiting_room#join_game'
 
   post '/create_waiting_room_player', to: 'waiting_room_player#create'

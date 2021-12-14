@@ -22,12 +22,9 @@
 
       <%= turbo_frame_tag "waiting_room_players" do %>
         <%= render @waiting_room_players %>
-        <%= form_with url: '/waiting_room', local: true, method: :upate do |f|%>
-          <%= f.label "Ready?", :value => "Yes"  %>
-          <%= f.radio_button "Ready", true%>
-            <div id="ready_button">
-              <%= f.submit "Click to Ready Up after clicking bubble for, Ready?" %>
-            </div>
+        <%= form_with url: '/waiting_room', local: true, method: :put do |f|%>
+          <%= f.text_field :one_ready_up, placeholder: "Type 'Ready'" %>
+          <%= f.submit "Let's Go!" %>
         <% end %>
       <% end %>
 

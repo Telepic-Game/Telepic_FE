@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_13_163930) do
+ActiveRecord::Schema.define(version: 2021_12_14_171931) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 2021_12_13_163930) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "player_count"
+    t.integer "ready_up_counter"
   end
 
   add_foreign_key "cards", "stacks"

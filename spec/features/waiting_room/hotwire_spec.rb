@@ -15,11 +15,20 @@ RSpec.describe "Waiting Room - Hotwire Tests", type: :feature do
       fill_in :player_count, with: 3
       click_button "Open Waiting Room"
 # save_and_open_page
-      # expect(page.first('div#waiting_room_player').text).to eq('Jordan Beck')
+      expect(page.first('div#waiting_room_player').text).to eq('Jordan Beck')
 
       within 'div#player_count' do
         expect(page).to have_content("3 Player Game")
       end
+
+      expect(current_path).to eq(waiting_room_path)
+save_and_open_page
+
+      # within 'div#ready_fields' do
+        # expect(page).to have_content("Let's Go!")
+      # end
+
+      click_on("Let's Go!")
 
       expect(current_path).to eq(waiting_room_path)
 
@@ -30,6 +39,10 @@ RSpec.describe "Waiting Room - Hotwire Tests", type: :feature do
       fill_in :username, with: "Kris Litman"
       fill_in :room_code, with: room_code
       click_button "Join Waiting Room"
+
+      expect(current_path).to eq(waiting_room_path)
+
+      click_on("Let's Go!")
 
       expect(current_path).to eq(waiting_room_path)
 
@@ -48,9 +61,7 @@ RSpec.describe "Waiting Room - Hotwire Tests", type: :feature do
       expect(group.first.text).to eq('Jordan Beck')
       expect(current_path).to eq(waiting_room_path)
 
-      save_and_open_page
-      click_button("Ready")
-      click_button("Click to Ready Up after clicking bubble for, Ready?")
+      click_on("Let's Go!")
 
       expect(current_path).to eq(waiting_room_path)
       expect(page).to have_content("Welcome to round 1!")
